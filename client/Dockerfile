@@ -3,9 +3,8 @@ FROM node:alpine
 RUN mkdir /client
 WORKDIR /client
 COPY . /client
-RUN yarn
-RUN yarn global add nodemon
+RUN npm install
 
-CMD ["yarn", "dev"]
+CMD ["npm", "run", "start"]
 
 EXPOSE 3000
