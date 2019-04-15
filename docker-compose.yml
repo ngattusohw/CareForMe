@@ -1,0 +1,54 @@
+version: '3'
+services:
+    proxy:
+        image: traefik
+        networks:
+            - cfm
+        ports:
+            - '80:80'
+            - '443:443'
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - ./traefik.toml:/etc/traefik/traefik.toml
+            - ./certs/:/certs/
+    mongo:
+        container_name: mongo
+        image: mongo
+        ports:
+            - '27017:27017'
+        networks:
+            - cfm
+    cfm_server:
+        container_name: cfm-server
+        restart: always
+        build: ./server/
+        volumes:
+            - ./server/:/server
+            - /server/node_modules
+        links:
+            - mongo
+        depends_on:
+            - mongo
+        networks:
+            - cfm
+        labels:
+            traefik.frontend.rule: 'PathPrefix: /api/'
+    cfm_client:
+        container_name: cfm-client
+        restart: always
+        build: ./client/
+        volumes:
+            - ./client:/client
+            - /client/node_modules
+        links:
+            - cfm_server
+        depends_on:
+            - cfm_server
+        networks:
+            - cfm
+        labels:
+            traefik.frontend.rule: 'PathPrefix: /'
+
+networks:
+    cfm:
+        driver: bridge
