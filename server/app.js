@@ -7,8 +7,9 @@ const resolvers = require('./resolver.js');
 const PORT = 5555;
 const app = express();
 
+const path = '/api/graphql';
 const apolloserver = new ApolloServer({typeDefs, resolvers});
-apolloserver.applyMiddleware({app});
+apolloserver.applyMiddleware({app, path});
 
 const server = createServer(app);
 server.listen(PORT, ()=>{

@@ -9,4 +9,4 @@ RUN npm install nodemon -g
 
 CMD ["npm", "run", "dev"]
 
-EXPOSE 5000
+EXPOSE 5555
