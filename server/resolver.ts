@@ -1,6 +1,6 @@
-const resolvers = {
+export const resolvers = {
     Query: {
-        launches: (ids) => {
+        launches: (ids: string[]) => {
             return [{
                 id: 1,
                 site: "Cape Canaveral",
@@ -18,5 +18,3 @@ const resolvers = {
         }
     }
 }
-
-module.exports = resolvers;

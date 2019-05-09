@@ -1,8 +1,8 @@
-const express = require('express');
-const {ApolloServer} = require('apollo-server-express');
-const createServer = require('http').createServer;
-const typeDefs = require('./schema.js');
-const resolvers = require('./resolver.js');
+import express = require('express');
+import {ApolloServer} from 'apollo-server-express';
+import {createServer} from 'http';
+import {typeDefs} from './schema';
+import {resolvers} from './resolver';
 
 const PORT = 5555;
 const app = express();

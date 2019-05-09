@@ -1,6 +1,6 @@
-const {gql} = require('apollo-server');
+import {gql} from 'apollo-server-express';
 
-const typeDefs = gql`
+export const typeDefs = gql`
 type Query {
   launches: [Launch]!
   launch(id: ID!): Launch
@@ -49,5 +49,3 @@ type TripUpdateResponse {
   launches: [Launch]
 }
 `;
-
-module.exports = typeDefs;
