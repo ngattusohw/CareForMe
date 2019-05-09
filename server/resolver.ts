@@ -1,6 +1,6 @@
 export const resolvers = {
     Query: {
-        launches: (ids: string[]) => {
+        launches: () => {
             return [{
                 id: 1,
                 site: "Cape Canaveral",
@@ -15,6 +15,22 @@ export const resolvers = {
                 },
                 isBooked: true
             }];
+        },
+        launch: (id: string) => {
+            return {
+                id: id,
+                site: "Cape Canaveral",
+                mission: {
+                    name: "test 1",
+                    missionPatch: "SMALL"
+                },
+                rocket: {
+                    id: 1,
+                    name: "Eagle",
+                    type: "Booster"
+                },
+                isBooked: true
+            }
         }
     }
 }

@@ -6,6 +6,7 @@ ADD . /server
 
 RUN npm install
 RUN npm install nodemon -g
+RUN npm run compile
 
 CMD ["npm", "run", "dev"]
 
