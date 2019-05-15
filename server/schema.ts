@@ -15,6 +15,14 @@ type Query {
 }
 
 type Mutation {
+  donate(campaignid: ID, amount: Int): Donation
+  update(campaignid: ID, update: Update): Update
+  createCampaign(description: String, creatorid: ID, goal: Int, recurring: Boolean, wantsApproval: Boolean): Campaign
+  createUser(name: String, doctor: Boolean, bio: String, picture: String): User
+  updateUser(userid: ID, user: User): User
+  deleteUser(id: ID): Boolean
+  deleteCampaign(id: ID): Boolean
+  deleteDonationPledge(id: ID): Boolean
 }
 
 type User {
