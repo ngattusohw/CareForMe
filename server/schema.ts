@@ -2,6 +2,15 @@ import {gql} from 'apollo-server-express';
 
 export const typeDefs = gql`
 type Query {
+  getUser(id: ID): User
+  getDoctors: [User]!
+  getCampaigns: [Campaign]!
+  getCampaignsFiltered(filter: Campaign): [Campaign]!
+  getUpdates(campaignid: ID): [Update]!
+  getDonationsByUser(userid: ID): [Donation]!
+  getDonationsByCampaign(campaignid: ID): [Donation]!
+  getDonation(id: ID): Donation
+  getUpdatesByCampaign(campaignid: ID): [Update]!
   me: User
 }
 
