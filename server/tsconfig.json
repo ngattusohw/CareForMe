@@ -1,12 +1,11 @@
 {
-    "compilerOptions": {
-        "target": "ES5",
-        "module": "commonjs",
-        "allowSyntheticDefaultImports": true,
-        "moduleResolution": "node"
-    },
-    "esModuleInterop": true,
-    "exclude": [
-        "node_modules"
-    ]
+	"compilerOptions": {
+		"outDir": "./dist",
+		"target": "ES5",
+		"module": "commonjs",
+		"allowSyntheticDefaultImports": true,
+		"moduleResolution": "node"
+	},
+	"esModuleInterop": true,
+	"exclude": ["node_modules"]
 }
