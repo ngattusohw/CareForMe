@@ -45,7 +45,15 @@ const LoginRegisterPage = ({ history }) => {
 		<div className={styles.container}>
 			<div className={styles.buttonContainer}>
 				<div className={styles.authForm}>
-					<img src={img} className={styles.logo} alt="CareForMe Logo" />
+					<img
+						src={img}
+						className={styles.logo}
+						alt="CareForMe Logo"
+						onClick={() => {
+							history.push('/');
+						}}
+					/>
+					Login!
 					<div className={styles.roleButtonContainer}>
 						{['User', 'Doctor'].map(role => (
 							<button

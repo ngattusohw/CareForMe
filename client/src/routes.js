@@ -1,4 +1,4 @@
-import { HomePage, LoginRegisterPage } from './containers';
+import { HomePage, LoginRegisterPage, RegisterPage } from './containers';
 
 export default [
 	{
@@ -10,5 +10,10 @@ export default [
 		path: '/login',
 		exact: true,
 		component: LoginRegisterPage,
+	},
+	{
+		path: '/register',
+		exact: true,
+		component: RegisterPage,
 	},
 ];
