@@ -1,5 +1,6 @@
 import React from 'react';
 import { HomePageNavBar } from '../../components';
+import { withRouter } from 'react-router-dom';
 import { Card, Icon, Label } from 'semantic-ui-react';
 import styles from './HomePage.module.css';
 
@@ -15,15 +16,17 @@ const tempArray = [
 		meta: '10,000 a month',
 		description: 'Elliot suffers from PTSD, and requires medicine that costs 10k/month',
 		doctor_approved: true,
+		campaignId: '12131',
 	},
 	{
 		name: 'Jake Collier',
 		meta: '500 a month',
 		description: 'Jake has type 1 diabetes, and his insurance-non reimbursable payments are upwards of 500 a month',
+		campaignId: '12312124124',
 	},
 ];
 
-const HomePage = () => (
+const HomePage = ({ history }) => (
 	<div>
 		<HomePageNavBar />
 		HomePage!
@@ -31,9 +34,34 @@ const HomePage = () => (
 			{tempArray.map(a => (
 				<div className={styles.element}>
 					{a.doctor_approved ? (
-						<Card header={a.name} meta={a.meta} description={a.description} extra={doctor_approved} />
+						<Card
+							header={a.name}
+							meta={a.meta}
+							description={a.description}
+							extra={doctor_approved}
+							onClick={() => {
+								history.push({
+									pathname: `/${a.campaignId.toLowerCase()}`,
+									state: {
+										username: a.name,
+									},
+								});
+							}}
+						/>
 					) : (
-						<Card header={a.name} meta={a.meta} description={a.description} />
+						<Card
+							header={a.name}
+							meta={a.meta}
+							description={a.description}
+							onClick={() => {
+								history.push({
+									pathname: `/${a.campaignId.toLowerCase()}`,
+									state: {
+										username: a.name,
+									},
+								});
+							}}
+						/>
 					)}
 				</div>
 			))}
@@ -41,4 +69,4 @@ const HomePage = () => (
 	</div>
 );
 
-export default HomePage;
+export default withRouter(HomePage);
