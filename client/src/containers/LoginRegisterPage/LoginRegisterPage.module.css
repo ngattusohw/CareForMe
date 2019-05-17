@@ -1,0 +1,124 @@
+input {
+	font-size: 1rem;
+	outline: none;
+	border: none;
+	background-color: #f4f5f7;
+	border: 2px solid #e7e7e7;
+	box-sizing: border-box;
+	padding: 1rem 0.5rem;
+	border-radius: 4px;
+	transition: all 200ms ease-in-out;
+	width: 100%;
+	margin: 0.5rem 0;
+}
+
+input:focus {
+	border-color: rgba(53, 135, 164, 1);
+}
+
+.logo {
+	width: 50%;
+	/* padding: 30px; */
+}
+
+.authForm {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 10px;
+	width: 100%;
+	box-sizing: border-box;
+	max-width: 500px;
+	border-radius: 4px;
+	justify-content: space-between;
+}
+
+.submitButton {
+	width: 100%;
+	/* width: 10rem; */
+	height: 4rem;
+	margin-top: 1rem;
+	background-color: rgba(53, 135, 164, 1);
+	outline: none;
+	text-decoration: none;
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	display: inline-block;
+	font-size: 16px;
+	border-radius: 4px;
+	letter-spacing: 0.1rem;
+}
+
+.roleButtonContainer {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	text-align: center;
+	margin: 0.5rem;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.roleButton {
+	/* width: 30%; */
+	background-color: rgba(53, 135, 164, 1);
+	outline: none;
+	text-decoration: none;
+	border: none;
+	color: white;
+	padding: 3% 3%;
+	text-align: center;
+	display: inline-block;
+	border: none;
+	font-size: 16px;
+	border-radius: 4px;
+	letter-spacing: 0.1rem;
+	cursor: pointer;
+}
+
+.selectedUserType {
+	opacity: 0.5;
+	font-weight: bold;
+}
+
+@media only screen and (max-width: 1015px) {
+	.roleButtonContainer {
+		flex-direction: column;
+		margin-bottom: 20px !important;
+	}
+	.roleButton {
+		width: 100%;
+		margin: 10px;
+		padding: 15px;
+	}
+}
+.container {
+	width: 100vw;
+	height: 100%;
+	background-color: hsla(202%, 61%, 85%, 1);
+	background-color: rgba(193, 223, 240, 1);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.buttonContainer {
+	text-align: center;
+	width: 50%;
+	background-color: rgba(235, 243, 244, 1);
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	/* margin-bottom: 10vh; */
+	margin-top: 20px;
+}
+
+.registerLink {
+	cursor: pointer;
+	color: blue;
+	text-decoration: underline;
+}
