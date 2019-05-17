@@ -68,14 +68,14 @@ const LoginRegisterPage = ({ history }) => {
 					</button>
 				</div>
 			</div>
-			<a
+			<div
 				className={styles.registerLink}
 				onClick={() => {
 					history.push('/register');
 				}}
 			>
 				Dont have an account? Register here!
-			</a>
+			</div>
 		</div>
 	);
 };

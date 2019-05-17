@@ -11,7 +11,7 @@
 	float: left;
 }
 
-.element a {
+.element div {
 	display: block;
 	color: #666;
 	text-align: center;
@@ -19,7 +19,7 @@
 	text-decoration: none;
 }
 
-.element a:hover {
+.element div:hover {
 	opacity: 0.5;
 	cursor: pointer;
 }

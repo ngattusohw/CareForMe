@@ -6,17 +6,17 @@ const HomePageNavBar = ({ history }) => (
 	<div>
 		<ul className={styles.container}>
 			<li className={styles.element}>
-				<a>CareForMe</a>
+				<div>CareForMe</div>
 			</li>
 			<li className={styles.element} style={{ float: 'right' }}>
-				<a
+				<div
 					className={styles.active}
 					onClick={() => {
 						history.push('/login');
 					}}
 				>
 					Login
-				</a>
+				</div>
 			</li>
 		</ul>
 	</div>
