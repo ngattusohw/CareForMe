@@ -3,7 +3,6 @@ import shortid from 'shortid';
 import { withRouter } from 'react-router-dom';
 import styles from './LoginRegisterPage.module.css';
 import img from '../../images/logo_transparent.png';
-// import { postLoginUser, loggedIn } from '../../utils/lssApi';
 
 const submit = async (u, p, t, history, setErrorMessage) => {
 	if (!t) {
@@ -46,7 +45,7 @@ const LoginRegisterPage = ({ history }) => {
 		<div className={styles.container}>
 			<div className={styles.buttonContainer}>
 				<div className={styles.authForm}>
-					<img src={img} className={styles.logo} alt="Life Skills Software logo" />
+					<img src={img} className={styles.logo} alt="CareForMe Logo" />
 					<div className={styles.roleButtonContainer}>
 						{['User', 'Doctor'].map(role => (
 							<button
@@ -59,11 +58,7 @@ const LoginRegisterPage = ({ history }) => {
 						))}
 					</div>
 					{errorMessage ? <h3 style={{ color: 'red' }}>{errorMessage}</h3> : null}
-					<input
-						type="text"
-						placeholder={usertype === 'Teacher' ? 'Email' : 'Username'}
-						onChange={e => setUsername(e.target.value)}
-					/>
+					<input type="text" placeholder={'Username'} onChange={e => setUsername(e.target.value)} />
 					<input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
 					<button
 						className={styles.submitButton}
@@ -73,6 +68,14 @@ const LoginRegisterPage = ({ history }) => {
 					</button>
 				</div>
 			</div>
+			<a
+				className={styles.registerLink}
+				onClick={() => {
+					history.push('/register');
+				}}
+			>
+				Dont have an account? Register here!
+			</a>
 		</div>
 	);
 };
