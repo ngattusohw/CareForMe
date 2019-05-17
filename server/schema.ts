@@ -37,11 +37,11 @@ type User {
 type Campaign {
   id: ID!
   description: String!
-  creator: User!
+  creatorid: ID!
   goal: Int!
   recurring: Boolean!
   date: String!
-  doctor: User
+  doctorid: ID
   wantsApproval: Boolean
   updateIds: [ID]
   donationIds: [ID]
@@ -50,6 +50,7 @@ type Campaign {
 type Update {
   id: ID!
   userId: ID!
+  campaignId: ID!
   comment: String!
   date: String!
 }
