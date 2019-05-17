@@ -1,4 +1,3 @@
-import React from 'react';
 import { HomePage, LoginRegisterPage } from './containers';
 
 export default [

@@ -5,7 +5,7 @@ import routes from '../../routes';
 class App extends Component {
 	render() {
 		return (
-			<div className="App">
+			<div className="App" style={{ height: '100%' }}>
 				<Router>
 					<Switch>
 						{routes.map((route, i) => (
