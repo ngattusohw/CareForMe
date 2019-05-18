@@ -18,8 +18,6 @@ export interface Campaign extends Document {
 	date: string;
 	doctorid?: string;
 	wantsApproval?: boolean;
-	updateIds?: string[];
-	donationIds?: string[];
 }
 
 export interface Update extends Document {
