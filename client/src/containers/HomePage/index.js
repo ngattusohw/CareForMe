@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { HomePageNavBar } from '../../components';
 import { withRouter } from 'react-router-dom';
-import { Card, Icon, Label } from 'semantic-ui-react';
+import { Card, Icon, Label, Button, Header, Divider, Segment, Grid } from 'semantic-ui-react';
 import styles from './HomePage.module.css';
+import img from '../../images/logo_transparent.png';
 
 const doctor_approved = (
 	<Label as="a" color="teal" tag>
@@ -19,6 +20,20 @@ const tempArray = [
 		campaignId: '12131',
 	},
 	{
+		name: 'Elliot Baker',
+		meta: '10,000 a month',
+		description: 'Elliot suffers from PTSD, and requires medicine that costs 10k/month',
+		doctor_approved: true,
+		campaignId: '542',
+	},
+	{
+		name: 'Elliot Baker',
+		meta: '10,000 a month',
+		description: 'Elliot suffers from PTSD, and requires medicine that costs 10k/month',
+		doctor_approved: true,
+		campaignId: '876',
+	},
+	{
 		name: 'Jake Collier',
 		meta: '500 a month',
 		description: 'Jake has type 1 diabetes, and his insurance-non reimbursable payments are upwards of 500 a month',
@@ -26,47 +41,91 @@ const tempArray = [
 	},
 ];
 
-const HomePage = ({ history }) => (
-	<div>
-		<HomePageNavBar />
-		HomePage!
-		<div className={styles.cardContainer}>
-			{tempArray.map(a => (
-				<div className={styles.element}>
-					{a.doctor_approved ? (
-						<Card
-							header={a.name}
-							meta={a.meta}
-							description={a.description}
-							extra={doctor_approved}
-							onClick={() => {
-								history.push({
-									pathname: `/campaign/${a.campaignId.toLowerCase()}`,
-									state: {
-										name: a.name,
-									},
-								});
-							}}
-						/>
-					) : (
-						<Card
-							header={a.name}
-							meta={a.meta}
-							description={a.description}
-							onClick={() => {
-								history.push({
-									pathname: `/campaign/${a.campaignId.toLowerCase()}`,
-									state: {
-										name: a.name,
-									},
-								});
-							}}
-						/>
-					)}
-				</div>
-			))}
+const loadFunc = (cardItems, setCardItems) => {
+	setCardItems([
+		...cardItems,
+		{
+			name: 'Jake Collier',
+			meta: '500 a month',
+			description:
+				'Jake has type 1 diabetes, and his insurance-non reimbursable payments are upwards of 500 a month',
+			campaignId: toString(Math.floor(Math.random() * 100 + 1)),
+		},
+	]);
+};
+
+const HomePage = ({ history }) => {
+	const [cardItems, setCardItems] = useState([]);
+	useEffect(() => {
+		setCardItems(tempArray);
+	}, []);
+
+	return (
+		<div>
+			<HomePageNavBar />
+			<Segment>
+				<Grid columns={2} relaxed="very">
+					<Grid.Column>
+						<img src={img} className={styles.logo} alt="CareForMe Logo" />
+					</Grid.Column>
+					<Grid.Column>
+						<p>Big feels bad</p>
+					</Grid.Column>
+				</Grid>
+
+				<Divider vertical> About</Divider>
+			</Segment>
+			<Divider horizontal>
+				<Header as="h4">
+					<Icon name="tag" />
+					Active Campaigns
+				</Header>
+			</Divider>
+			<div className={styles.cardContainer}>
+				{cardItems.map(a => (
+					<div className={styles.element}>
+						{a.doctor_approved ? (
+							<Card
+								header={a.name}
+								meta={a.meta}
+								description={a.description}
+								extra={doctor_approved}
+								onClick={() => {
+									history.push({
+										pathname: `/campaign/${a.campaignId.toLowerCase()}`,
+										state: {
+											name: a.name,
+										},
+									});
+								}}
+							/>
+						) : (
+							<Card
+								header={a.name}
+								meta={a.meta}
+								description={a.description}
+								onClick={() => {
+									history.push({
+										pathname: `/campaign/${a.campaignId.toLowerCase()}`,
+										state: {
+											name: a.name,
+										},
+									});
+								}}
+							/>
+						)}
+					</div>
+				))}
+				<Button
+					onClick={() => {
+						loadFunc(cardItems, setCardItems);
+					}}
+				>
+					Load more
+				</Button>
+			</div>
 		</div>
-	</div>
-);
+	);
+};
 
 export default withRouter(HomePage);
