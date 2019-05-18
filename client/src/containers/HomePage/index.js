@@ -41,9 +41,9 @@ const HomePage = ({ history }) => (
 							extra={doctor_approved}
 							onClick={() => {
 								history.push({
-									pathname: `/${a.campaignId.toLowerCase()}`,
+									pathname: `/campaign/${a.campaignId.toLowerCase()}`,
 									state: {
-										username: a.name,
+										name: a.name,
 									},
 								});
 							}}
@@ -55,9 +55,9 @@ const HomePage = ({ history }) => (
 							description={a.description}
 							onClick={() => {
 								history.push({
-									pathname: `/${a.campaignId.toLowerCase()}`,
+									pathname: `/campaign/${a.campaignId.toLowerCase()}`,
 									state: {
-										username: a.name,
+										name: a.name,
 									},
 								});
 							}}

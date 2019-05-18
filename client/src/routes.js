@@ -1,4 +1,5 @@
-import { HomePage, LoginRegisterPage, RegisterPage } from './containers';
+import React from 'react';
+import { HomePage, LoginRegisterPage, RegisterPage, CampaignPage } from './containers';
 
 export default [
 	{
@@ -15,5 +16,16 @@ export default [
 		path: '/register',
 		exact: true,
 		component: RegisterPage,
+	},
+	{
+		path: '/campaign/:campaignId',
+		component: ({
+			match: {
+				params: { campaignId = '' },
+			},
+			location: {
+				state: { name = '' },
+			},
+		}) => <CampaignPage campaignId={campaignId} name={name} />,
 	},
 ];
