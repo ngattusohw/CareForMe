@@ -6,6 +6,7 @@ const errorHandler = function(err, data) {
 	if (err) {
 		console.log(err);
 	}
+	console.log("callback:");
 	console.log(data);
 	return;
 }
@@ -54,17 +55,17 @@ export const resolvers = {
 		},
 	},
     Mutation: {
-        donate: async (_, { userid, campaignid, amount, date }, { dataSources }): Promise<Donation> => {
-            var result;
-            const create = await DonationDB.create({ _id: Types.ObjectId(), userId: Types.ObjectId(userid), campaignId: Types.ObjectId(campaignid), amount: amount, date: date }, async function (err, data) {
-                if (err) {
-                    console.log(err);
-                    return;
-                }
-                result = await data;
-                return;
-            });
-            return result;
+        donate: async (_, { userid, campaignid, amount }, { dataSources }): Promise<Donation> => {
+            var donation = {_id: Types.ObjectId(), userId: Types.ObjectId(userid), campaignId: Types.ObjectId(campaignid), amount: amount, date: new Date()};
+            await DonationDB.create(donation, errorHandler);
+            await CampaignDB.findOneAndUpdate({campaignId: campaignid}, { $push: {donationIds: donation._id}}, errorHandler);
+            return {
+            	id: donation._id,
+            	userId: donation.userId,
+            	campaignId: donation.campaignId,
+            	amount: donation.amount,
+            	date: donation.date.toString()
+            };
         },
         update: (_, { campaignid, update }, { dataSources }): Update => {
             return {

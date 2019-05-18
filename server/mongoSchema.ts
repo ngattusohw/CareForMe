@@ -1,4 +1,4 @@
-import { Document, Schema, Model, model } from "mongoose";
+import { Document, Schema, Model, model, Types } from "mongoose";
 import { User, Campaign, Update, Donation } from './models';
 
 const UserSchema: Schema = new Schema({
@@ -66,6 +66,9 @@ DonationSchema.pre("save", function (next) {
 	let now = new Date();
 	if (!this.date) {
 		this.date = now;
+	}
+	if (!this._id) {
+		this._id = Types.ObjectId();
 	}
 	next();
 });
