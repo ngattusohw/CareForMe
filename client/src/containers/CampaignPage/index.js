@@ -37,7 +37,7 @@ const CampaignPage = ({ campaignId, name }) => {
 						<Grid.Column>
 							<Card
 								image="/images/avatar/large/elliot.jpg"
-								header="Elliot Baker"
+								header={name}
 								meta="Friend"
 								description="Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his cat."
 							/>
