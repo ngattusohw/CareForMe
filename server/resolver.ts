@@ -1,36 +1,15 @@
 import { User, Campaign, Update, Donation } from './models';
+import { UserDB } from './mongo/mongoSchema';
 
 export const resolvers = {
 	Query: {
-		getUser: (id: string): User => {
-			return {
-				id: id,
-				name: 'Test 1',
-				doctor: false,
-				date: '2019-01-01T00:00Z',
-			};
+		async getUser(id: string) {
+			const result = await UserDB.findById(id);
+			return result.toObject();
 		},
-		getDoctors: (): User[] => {
-			return [
-				{
-					id: 'U2',
-					name: 'Test 2',
-					doctor: true,
-					date: '2019-01-01T00:00Z',
-				},
-				{
-					id: 'U3',
-					name: 'Test 3',
-					doctor: true,
-					date: '2019-01-01T00:00Z',
-				},
-				{
-					id: 'U4',
-					name: 'Test 4',
-					doctor: true,
-					date: '2019-01-01T00:00Z',
-				},
-			];
+		async getDoctors() {
+			const result = await UserDB.find(doctor: true);
+			return result.toObject();
 		},
 		getCampaigns: (): Campaign[] => {
 			return [
@@ -115,13 +94,25 @@ export const resolvers = {
 				wantsApproval: wantsApproval,
 			};
 		},
-		createUser: (name: String, doctor: boolean, bio: String, picture: String): User => {
-			return {
-				id: 'U0',
-				name: 'Test 0',
-				doctor: false,
-				date: '2019-01-01T00:00Z',
-			};
+		async createUser(name: String, doctor: boolean, bio: String, picture: String) {
+			const newUser = new UserDB({name: name, doctor: doctor, bio: bio, picture: picture});
+			var createdUser;
+			await newUser.save(function (err, user) {
+				if (err) {
+					console.log(err);
+					return;
+				}
+				createdUser = {
+					id: user._id,
+					name: user.name,
+					doctor: user.doctor,
+					date: user.date,
+					bio: user.bio,
+					picture: user.picture
+				};
+				return;
+			});
+			return createdUser;
 		},
 		updateUser: (userid: string, user): User => {
 			return {
