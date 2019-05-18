@@ -6,7 +6,13 @@ const HomePageNavBar = ({ history }) => (
 	<div>
 		<ul className={styles.container}>
 			<li className={styles.element}>
-				<div>CareForMe</div>
+				<div
+					onClick={() => {
+						history.push('/');
+					}}
+				>
+					CareForMe
+				</div>
 			</li>
 			<li className={styles.element} style={{ float: 'right' }}>
 				<div
