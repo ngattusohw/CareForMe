@@ -18,6 +18,12 @@ services:
             - '27017:27017'
         networks:
             - cfm
+    mongo-seed:
+        build: ./mongo-seed
+        links:
+            - mongo
+        networks:
+            - cfm
     redis:
         image: redis
         networks:

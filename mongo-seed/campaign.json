@@ -1,0 +1,27 @@
+[
+	{
+		_id: "0",
+		description: "Pls help",
+		creatorid: "1",
+		goal: 500000,
+		recurring: true,
+		date: "today",
+		doctorid: "0",
+		wantsApproval: true,
+		updateIds: [],
+		donationIds: ["0", "1"]
+	},
+	{
+		_id: "1",
+		description: "Bro I'm straight up not having a good time",
+		creatorid: "3",
+		goal: 40000,
+		recurring: false,
+		date: "yesterday",
+		doctorid: "2",
+		wantsApproval: false,
+		updateIds: ["0"],
+		donationIds: ["2"]
+	}
+]
+	

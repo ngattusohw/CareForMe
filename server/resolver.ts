@@ -1,52 +1,158 @@
 import { User, Campaign, Update, Donation } from './models';
-import { UserDB } from './mongo/mongoSchema';
+import { UserDB, CampaignDB, DonationDB, UpdateDB } from './mongo/mongoSchema';
 
 export const resolvers = {
 	Query: {
 		async getUser(id: string) {
-			const result = await UserDB.findById(id);
-			return result.toObject();
+			//const result = await UserDB.findById(id);
+			var result;
+			const find = await UserDB.findOne({_id : "3"}, function(err, user) {
+				if (err) {
+					console.log(err);
+					return;
+				}
+				//console.log(user);
+				result = user;
+				return;
+			});
+			if (result === null) {
+				return null;
+			}
+			return result;
 		},
 		async getDoctors() {
-			const result = await UserDB.find(doctor: true);
-			return result.toObject();
+			var result;
+			const find = await UserDB.find({doctor: true}, function(err, doctors) {
+				if (err) {
+					console.log(err);
+					return;
+				}
+				//console.log(doctors);
+				result = doctors;
+				return;
+			});
+			if (result === null) {
+				return null;
+			}
+			return result;
 		},
-		getCampaigns: (): Campaign[] => {
-			return [
-				{
-					id: 'C1',
-					description: 'A test campaign',
-					creatorid: 'U1',
-					goal: 400,
-					recurring: false,
-					date: '2019-01-02T00:00Z',
-					donationIds: [],
-				},
-			];
+		async getCampaigns() {
+			var result;
+			const find = await CampaignDB.find({}, function(err, data) {
+				if (err) {
+					console.log(err);
+					return;
+				}
+				//console.log(doctors);
+				result = data;
+				return;
+			});
+			if (result === null) {
+				return null;
+			}
+			return result;
 		},
-		getCampaignsFiltered: (filter): Campaign[] => {
-			return [];
+		async getCampaignsFiltered(filter) {
+			var result;
+			//const find = await CampaignDB.find(filter, function(err, data) {
+			const find = await CampaignDB.find({recurring: true}, function(err, data) {
+				if (err) {
+					console.log(err);
+					return;
+				}
+				//console.log(doctors);
+				result = data;
+				return;
+			});
+			if (result === null) {
+				return null;
+			}
+			return result;
 		},
-		getUpdates: (campaignid: string): Update[] => {
-			return [];
+		async getUpdates(campaignid: string) {
+			var result;
+			// const find = await UpdateDB.find({campaignid: campaignid}, function(err, data) {
+			const find = await UpdateDB.find({campaignId: "0"}, function(err, data) {
+				if (err) {
+					console.log(err);
+					return;
+				}
+				//console.log(doctors);
+				result = data;
+				return;
+			});
+			if (result === null) {
+				return null;
+			}
+			return result;
 		},
-		getDonationsByUser: (userid: string): Donation[] => {
-			return [];
+		async getDonationsByUser(userid: string) {
+			var result;
+			// const find = await DonationDB.find({userid: userid}, function(err, data) {
+			const find = await DonationDB.find({userId: "0"}, function(err, data) {
+				if (err) {
+					console.log(err);
+					return;
+				}
+				//console.log(doctors);
+				result = data;
+				return;
+			});
+			if (result === null) {
+				return null;
+			}
+			return result;
 		},
-		getDonationsByCampaign: (campaignid: string): Donation[] => {
-			return [];
+		async getDonationsByCampaign(campaignid: string) {
+			var result;
+			// const find = await DonationDB.find({campaignid: campaignid}, function(err, data) {
+			const find = await DonationDB.find({campaignId: "0"}, function(err, data) {
+				if (err) {
+					console.log(err);
+					return;
+				}
+				//console.log(doctors);
+				result = data;
+				return;
+			});
+			if (result === null) {
+				return null;
+			}
+			return result;
 		},
-		getDonation: (id: string): Donation => {
-			return {
-				id: id,
-				userId: 'U2',
-				campaignId: 'C1',
-				amount: 200,
-				date: '2019-01-04T00:00Z',
-			};
+		async getDonation(id: string) {
+			var result;
+			// const find = await DonationDB.find({_id: id}, function(err, data) {
+			const find = await DonationDB.find({_id: "0"}, function(err, data) {
+				if (err) {
+					console.log(err);
+					return;
+				}
+				//console.log(doctors);
+				result = data;
+				return;
+			});
+			if (result === null) {
+				return null;
+			}
+			return result;
 		},
-		getUpdatesByCampaign: (campaignid: string): Update[] => {
-			return [];
+		async getUpdatesByCampaign(campaignid: string){
+			var result;
+			// const find = await UpdateDB.find({campaignid: campaignid}, function(err, data) {
+			const find = await UpdateDB.find({campaignId: "0"}, function(err, data) {
+				if (err) {
+					console.log(err);
+					return;
+				}
+				//console.log(doctors);
+				result = data;
+				return;
+			});
+			if (result === null) {
+				return null;
+			}
+			return result;
 		},
 		me: (): User => {
 			return {
