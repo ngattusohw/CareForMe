@@ -20,6 +20,7 @@ export const typeDefs = gql`
 
 	type Campaign {
 		id: ID!
+		title: String!
 		description: String!
 		creatorid: ID!
 		goal: Int!
@@ -30,6 +31,7 @@ export const typeDefs = gql`
 	}
 
 	input CampaignInput {
+		title: String
 		description: String
 		creatorid: ID
 		goal: Int

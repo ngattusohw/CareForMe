@@ -11,6 +11,7 @@ export interface User extends Document {
 
 export interface Campaign extends Document {
 	id: string;
+	title: String;
 	description: string;
 	creatorid: string;
 	goal: number;

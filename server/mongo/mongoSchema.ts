@@ -20,6 +20,7 @@ UserSchema.pre("save", function (next) {
 
 const CampaignSchema: Schema = new Schema({
 	_id: Schema.Types.ObjectId,
+	title: String,
 	description: String,
 	creatorid: { type: Schema.Types.ObjectId },
 	goal: Number,
