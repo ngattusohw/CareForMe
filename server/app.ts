@@ -10,8 +10,8 @@ const app = express();
 
 const path = '/api/graphql';
 const apolloserver = new ApolloServer({
-	typeDefs,
-	resolvers: resolvers as any,
+    typeDefs,
+    resolvers: resolvers as any
 });
 apolloserver.applyMiddleware({ app, path });
 
@@ -25,5 +25,5 @@ db.once('open', function() {
 });
 
 server.listen(PORT, () => {
-	console.log('Server is listening on port ' + PORT);
+    console.log('Server is listening on port ' + PORT);
 });

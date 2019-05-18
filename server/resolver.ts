@@ -121,79 +121,67 @@ export const resolvers = {
 			};
 		},
 	},
-	Mutation: {
-		donate: (campaignid: string, amount: number): Donation => {
-			return {
-				id: 'D0',
-				userId: 'U2',
-				campaignId: campaignid,
-				amount: amount,
-				date: '2019-01-04T00:00Z',
-			};
-		},
-		update: (campaignid: string, update): Update => {
-			return {
-				id: 'UP1',
-				userId: update.userId,
-				campaignId: update.campaignId,
-				comment: update.comment,
-				date: update.date,
-			};
-		},
-		createCampaign: (
-			description: string,
-			creatorid: string,
-			goal: number,
-			recurring: boolean,
-			wantsApproval: boolean
-		): Campaign => {
-			return {
-				id: 'C5',
-				description: description,
-				creatorid: creatorid,
-				goal: goal,
-				recurring: recurring,
-				date: '2019-01-02T00:00Z',
-				donationIds: [],
-				wantsApproval: wantsApproval,
-			};
-		},
-		async createUser(name: String, doctor: boolean, bio: String, picture: String) {
-			const newUser = new UserDB({name: name, doctor: doctor, bio: bio, picture: picture});
-			var createdUser;
-			await newUser.save(function (err, user) {
-				if (err) {
-					console.log(err);
-					return;
-				}
-				createdUser = {
-					id: user._id,
-					name: user.name,
-					doctor: user.doctor,
-					date: user.date,
-					bio: user.bio,
-					picture: user.picture
-				};
-				return;
-			});
-			return createdUser;
-		},
-		updateUser: (userid: string, user): User => {
-			return {
-				id: userid,
-				name: user.name,
-				doctor: user.doctor,
-				date: user.date,
-			};
-		},
-		deleteUser: (id: string): boolean => {
-			return true;
-		},
-		deleteCampaign: (id: string): boolean => {
-			return true;
-		},
-		deleteDonationPledge: (id: string): boolean => {
-			return true;
-		},
-	},
+    Mutation: {
+        donate: (_, { campaignid, amount }, { dataSources }): Donation => {
+            return {
+                id: 'D0',
+                userId: 'U2',
+                campaignId: campaignid,
+                amount: amount,
+                date: '2019-01-04T00:00Z',
+            };
+        },
+        update: (_, { campaignid, update }, { dataSources }): Update => {
+            return {
+                id: 'UP1',
+                userId: update.userId,
+                campaignId: update.campaignId,
+                comment: update.comment,
+                date: update.date,
+            };
+        },
+        createCampaign: (_, {
+            description,
+            creatorid,
+            goal,
+            recurring,
+            wantsApproval }, { dataSources }
+        ): Campaign => {
+            return {
+                id: 'C5',
+                description: description,
+                creatorid: creatorid,
+                goal: goal,
+                recurring: recurring,
+                date: '2019-01-02T00:00Z',
+                donationIds: [],
+                wantsApproval: wantsApproval,
+            };
+        },
+        createUser: (_, { name, doctor, bio, picture }, { dataSources }): User => {
+            return {
+                id: 'U0',
+                name: 'Test 0',
+                doctor: false,
+                date: '2019-01-01T00:00Z',
+            };
+        },
+        updateUser: (_, { userid, user }, { dataSources }): User => {
+            return {
+                id: userid,
+                name: user.name,
+                doctor: user.doctor,
+                date: user.date,
+            };
+        },
+        deleteUser: (_, { id }, { dataSources }): boolean => {
+            return true;
+        },
+        deleteCampaign: (_, { id }, { dataSources }): boolean => {
+            return true;
+        },
+        deleteDonationPledge: (_, { id }, { dataSources }): boolean => {
+            return true;
+        },
+    },
 };
