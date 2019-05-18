@@ -1,157 +1,115 @@
 import { User, Campaign, Update, Donation } from './models';
 import { UserDB, CampaignDB, DonationDB, UpdateDB } from './mongo/mongoSchema';
 
+
 export const resolvers = {
 	Query: {
-		async getUser(id: string) {
-			//const result = await UserDB.findById(id);
+		getUser: async (_, { id }, { dataSources }): Promise<User> => {
 			var result;
-			const find = await UserDB.findOne({_id : "3"}, function(err, user) {
+			const find = await UserDB.findOne({_id : id}, function(err, user) {
 				if (err) {
 					console.log(err);
 					return;
 				}
-				//console.log(user);
 				result = user;
 				return;
 			});
-			if (result === null) {
-				return null;
-			}
 			return result;
 		},
-		async getDoctors() {
+		getDoctors: async (_, { }, { dataSources }): Promise<User[]> => {
 			var result;
 			const find = await UserDB.find({doctor: true}, function(err, doctors) {
 				if (err) {
 					console.log(err);
 					return;
 				}
-				//console.log(doctors);
 				result = doctors;
 				return;
 			});
-			if (result === null) {
-				return null;
-			}
 			return result;
 		},
-		async getCampaigns() {
+		getCampaigns: async (_, { }, { dataSources }): Promise<Campaign[]> => {
 			var result;
 			const find = await CampaignDB.find({}, function(err, data) {
 				if (err) {
 					console.log(err);
 					return;
 				}
-				//console.log(doctors);
 				result = data;
 				return;
 			});
-			if (result === null) {
-				return null;
-			}
 			return result;
 		},
-		async getCampaignsFiltered(filter) {
+		getCampaignsFiltered: async (_, { filter }, { dataSources }): Promise<Campaign[]> => {
 			var result;
-			//const find = await CampaignDB.find(filter, function(err, data) {
-			const find = await CampaignDB.find({recurring: true}, function(err, data) {
+			const find = await CampaignDB.find(filter, function(err, data) {
 				if (err) {
 					console.log(err);
 					return;
 				}
-				//console.log(doctors);
 				result = data;
 				return;
 			});
-			if (result === null) {
-				return null;
-			}
 			return result;
 		},
-		async getUpdates(campaignid: string) {
+		getUpdates: async (_, { campaignid }, { dataSources }): Promise<Update[]> => {
 			var result;
-			// const find = await UpdateDB.find({campaignid: campaignid}, function(err, data) {
-			const find = await UpdateDB.find({campaignId: "0"}, function(err, data) {
+			const find = await UpdateDB.find({campaignId: campaignid}, function(err, data) {
 				if (err) {
 					console.log(err);
 					return;
 				}
-				//console.log(doctors);
 				result = data;
 				return;
 			});
-			if (result === null) {
-				return null;
-			}
 			return result;
 		},
-		async getDonationsByUser(userid: string) {
+		getDonationsByUser: async (_, { userid }, { dataSources }): Promise<Donation[]> => {
 			var result;
-			// const find = await DonationDB.find({userid: userid}, function(err, data) {
-			const find = await DonationDB.find({userId: "0"}, function(err, data) {
+			const find = await DonationDB.find({userId: userid}, function(err, data) {
 				if (err) {
 					console.log(err);
 					return;
 				}
-				//console.log(doctors);
 				result = data;
 				return;
 			});
-			if (result === null) {
-				return null;
-			}
 			return result;
 		},
-		async getDonationsByCampaign(campaignid: string) {
+		getDonationsByCampaign: async (_, { campaignid }, { dataSources }): Promise<Donation[]> => {
 			var result;
-			// const find = await DonationDB.find({campaignid: campaignid}, function(err, data) {
-			const find = await DonationDB.find({campaignId: "0"}, function(err, data) {
+			const find = await DonationDB.find({campaignId: campaignid}, function(err, data) {
 				if (err) {
 					console.log(err);
 					return;
 				}
-				//console.log(doctors);
 				result = data;
 				return;
 			});
-			if (result === null) {
-				return null;
-			}
 			return result;
 		},
-		async getDonation(id: string) {
+		getDonation: async (_, { id }, { dataSources }): Promise<Donation> => {
 			var result;
-			// const find = await DonationDB.find({_id: id}, function(err, data) {
-			const find = await DonationDB.find({_id: "0"}, function(err, data) {
+			const find = await DonationDB.find({_id: id}, function(err, data) {
 				if (err) {
 					console.log(err);
 					return;
 				}
-				//console.log(doctors);
 				result = data;
 				return;
 			});
-			if (result === null) {
-				return null;
-			}
 			return result;
 		},
-		async getUpdatesByCampaign(campaignid: string){
+		getUpdatesByCampaign: async (_, { campaignid }, { dataSources }): Promise<Update[]> => {
 			var result;
-			// const find = await UpdateDB.find({campaignid: campaignid}, function(err, data) {
-			const find = await UpdateDB.find({campaignId: "0"}, function(err, data) {
+			const find = await UpdateDB.find({campaignId: campaignid}, function(err, data) {
 				if (err) {
 					console.log(err);
 					return;
 				}
-				//console.log(doctors);
 				result = data;
 				return;
 			});
-			if (result === null) {
-				return null;
-			}
 			return result;
 		},
 		me: (): User => {
