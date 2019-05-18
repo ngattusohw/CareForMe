@@ -78,7 +78,7 @@ export const typeDefs = gql`
 	}
 
 	type Mutation {
-		donate(campaignid: ID, amount: Int): Donation
+		donate(userid: ID, campaignid: ID, amount: Int, date: String): Donation
 		update(campaignid: ID, update: UpdateInput): Update
 		createCampaign(
 			description: String
@@ -87,7 +87,7 @@ export const typeDefs = gql`
 			recurring: Boolean
 			wantsApproval: Boolean
 		): Campaign
-		createUser(name: String, doctor: Boolean, bio: String, picture: String): User
+		createUser(name: String, date: String, doctor: Boolean, bio: String, picture: String): User
 		updateUser(userid: ID, user: UserInput): User
 		deleteUser(id: ID): Boolean
 		deleteCampaign(id: ID): Boolean
