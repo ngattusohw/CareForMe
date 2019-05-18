@@ -8,7 +8,7 @@ const UserSchema: Schema = new Schema({
 	date: String,
 	bio: String,
 	picture: String
-});
+}, { versionKey: false });
 UserSchema.pre("save", function (next) {
 	let now = new Date();
 	if (!this.date) {
@@ -26,10 +26,8 @@ const CampaignSchema: Schema = new Schema({
 	recurring: Boolean,
 	date: String,
 	doctorid: { type: Schema.Types.ObjectId },
-	wantsApproval: Boolean,
-	updateIds: [{ type: Schema.Types.ObjectId }],
-	donationIds: [{ type: Schema.Types.ObjectId }]
-});
+	wantsApproval: Boolean
+}, { versionKey: false });
 CampaignSchema.pre("save", function (next) {
 	let now = new Date();
 	if (!this.date) {
@@ -45,7 +43,7 @@ const UpdateSchema: Schema = new Schema({
 	campaignId: { type: Schema.Types.ObjectId },
 	comment: String,
 	date: String
-});
+}, { versionKey: false });
 UpdateSchema.pre("save", function (next) {
 	let now = new Date();
 	if (!this.date) {
@@ -61,7 +59,7 @@ const DonationSchema: Schema = new Schema({
 	campaignId: { type: Schema.Types.ObjectId },
 	amount: Number,
 	date: String
-});
+}, { versionKey: false });
 DonationSchema.pre("save", function (next) {
 	let now = new Date();
 	if (!this.date) {

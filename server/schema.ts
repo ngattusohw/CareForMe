@@ -27,8 +27,6 @@ export const typeDefs = gql`
 		date: String!
 		doctorid: ID
 		wantsApproval: Boolean
-		updateIds: [ID]
-		donationIds: [ID]
 	}
 
 	input CampaignInput {
@@ -88,7 +86,7 @@ export const typeDefs = gql`
 			wantsApproval: Boolean
 		): Campaign
 		createUser(name: String, date: String, doctor: Boolean, bio: String, picture: String): User
-		updateUser(userid: ID, user: UserInput): User
+		updateUser(id: ID, user: UserInput): User
 		deleteUser(id: ID): Boolean
 		deleteCampaign(id: ID): Boolean
 		deleteDonationPledge(id: ID): Boolean
