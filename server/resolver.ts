@@ -123,79 +123,84 @@ export const resolvers = {
         },
     },
     Mutation: {
-        donate: async (_, { userid, campaignid, amount, date }, { dataSources }): Promise<Donation> => {
-            var result;
-            const create = await DonationDB.create({ _id: Types.ObjectId(), userId: Types.ObjectId(userid), campaignId: Types.ObjectId(campaignid), amount: amount, date: date }, async function (err, data) {
-                if (err) {
-                    console.log(err);
-                    return;
-                }
+        donate: async (_, { userid, campaignid, amount }, { dataSources }): Promise<Donation> => {
+            var data, result;
+            data = DonationDB.create({ _id: Types.ObjectId(), userId: Types.ObjectId(userid), campaignId: Types.ObjectId(campaignid), amount: amount });
+            try {
                 result = await data;
-                return;
-            });
+            } catch (err) {
+                throw err;
+            }
             return result;
         },
-        update: (_, { campaignid, update }, { dataSources }): Update => {
-            return {
-                id: 'UP1',
-                userId: update.userId,
-                campaignId: update.campaignId,
-                comment: update.comment,
-                date: update.date,
-            };
+        update: async (_, { userid, campaignid, comment }, { dataSources }): Promise<Update> => {
+            var data, result;
+            data = UpdateDB.create({ _id: Types.ObjectId(), userId: Types.ObjectId(userid), campaignId: Types.ObjectId(campaignid), comment: comment });
+            try {
+                result = await data;
+            } catch (err) {
+                throw err;
+            }
+            return result;
         },
-        createCampaign: (_, {
+        createCampaign: async (_, {
             description,
             creatorid,
             goal,
             recurring,
             wantsApproval }, { dataSources }
-        ): Campaign => {
-            return {
-                id: 'C5',
-                description: description,
-                creatorid: creatorid,
-                goal: goal,
-                recurring: recurring,
-                date: '2019-01-02T00:00Z',
-                donationIds: [],
-                wantsApproval: wantsApproval,
-            };
-        },
-        createUser: async (_, { name, date, doctor, bio, picture }, { dataSources }): Promise<User> => {
-            var result;
-            const create = await UserDB.create({ _id: Types.ObjectId(), name: name, date: date, doctor: doctor, bio: bio, picture: picture }, async function (err, data) {
-                if (err) {
-                    console.log(err);
-                    return;
-                }
-                console.log(JSON.stringify(data));
+        ): Promise<Campaign> => {
+            var data, result;
+            data = CampaignDB.create({ _id: Types.ObjectId(), description: description, creatorid: Types.ObjectId(creatorid), goal: goal, recurring: recurring, donationIds: [], wantsApproval: wantsApproval });
+            try {
                 result = await data;
-                return;
-            });
+            } catch (err) {
+                throw err;
+            }
             return result;
         },
-        updateUser: async (_, { userid, user }, { dataSources }): Promise<User> => {
-            var result;
-            const update = await UserDB.updateOne({ _id: Types.ObjectId(userid) }, {
-                $set: { user }
-            }, async function (err, user) {
-                if (err) {
-                    console.log(err);
-                    return;
-                }
-                result = await user;
-                return;
-            });
+        createUser: async (_, { name, doctor, bio, picture }, { dataSources }): Promise<User> => {
+            var data, result;
+            data = UserDB.create({ _id: Types.ObjectId(), name: name, doctor: doctor, bio: bio, picture: picture });
+            try {
+                result = await data;
+            } catch (err) {
+                throw err;
+            }
+            return result;
+        },
+        updateUser: async (_, { id, user }, { dataSources }): Promise<User> => {
+            var data, result;
+            data = UserDB.updateOne({ _id: Types.ObjectId(id) }, { $set: { user } });
+            try {
+                result = await data;
+            } catch (err) {
+                throw err;
+            }
             return result;
         },
         deleteUser: (_, { id }, { dataSources }): boolean => {
+            UserDB.deleteOne({ _id: Types.ObjectId(id) }, function (err) {
+                if (err) {
+                    throw err;
+                }
+            });
             return true;
         },
         deleteCampaign: (_, { id }, { dataSources }): boolean => {
+            CampaignDB.deleteOne({ _id: Types.ObjectId(id) }, function (err) {
+                if (err) {
+                    throw err;
+                }
+            });
             return true;
         },
         deleteDonationPledge: (_, { id }, { dataSources }): boolean => {
+            DonationDB.deleteOne({ _id: Types.ObjectId(id) }, function (err) {
+                if (err) {
+                    throw err;
+                }
+            });
             return true;
         },
     },
