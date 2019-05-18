@@ -1,127 +1,58 @@
 import { User, Campaign, Update, Donation } from './models';
-import { UserDB, CampaignDB, DonationDB, UpdateDB } from './mongo/mongoSchema';
+import { UserDB, CampaignDB, DonationDB, UpdateDB } from './mongoSchema';
 import { Document, Schema, Model, model, Types } from "mongoose";
 
+const errorHandler = function(err, data) {
+	if (err) {
+		console.log(err);
+	}
+	console.log(data);
+	return;
+}
 
 export const resolvers = {
-    Query: {
-        getUser: async (_, { id }, { dataSources }): Promise<User> => {
-            var result;
-            const find = await UserDB.findOne({ _id: id }, function (err, user) {
-                if (err) {
-                    console.log(err);
-                    return;
-                }
-                result = user;
-                return;
-            });
-            return result;
-        },
-        getDoctors: async (_, { }, { dataSources }): Promise<User[]> => {
-            var result;
-            const find = await UserDB.find({ doctor: true }, function (err, doctors) {
-                if (err) {
-                    console.log(err);
-                    return;
-                }
-                result = doctors;
-                return;
-            });
-            return result;
-        },
-        getCampaigns: async (_, { }, { dataSources }): Promise<Campaign[]> => {
-            var result;
-            const find = await CampaignDB.find({}, function (err, data) {
-                if (err) {
-                    console.log(err);
-                    return;
-                }
-                result = data;
-                return;
-            });
-            return result;
-        },
-        getCampaignsFiltered: async (_, { filter }, { dataSources }): Promise<Campaign[]> => {
-            var result;
-            const find = await CampaignDB.find(filter, function (err, data) {
-                if (err) {
-                    console.log(err);
-                    return;
-                }
-                result = data;
-                return;
-            });
-            return result;
-        },
-        getUpdates: async (_, { campaignid }, { dataSources }): Promise<Update[]> => {
-            var result;
-            const find = await UpdateDB.find({ campaignId: campaignid }, function (err, data) {
-                if (err) {
-                    console.log(err);
-                    return;
-                }
-                result = data;
-                return;
-            });
-            return result;
-        },
-        getDonationsByUser: async (_, { userid }, { dataSources }): Promise<Donation[]> => {
-            var result;
-            const find = await DonationDB.find({ userId: userid }, function (err, data) {
-                if (err) {
-                    console.log(err);
-                    return;
-                }
-                result = data;
-                return;
-            });
-            return result;
-        },
-        getDonationsByCampaign: async (_, { campaignid }, { dataSources }): Promise<Donation[]> => {
-            var result;
-            const find = await DonationDB.find({ campaignId: campaignid }, function (err, data) {
-                if (err) {
-                    console.log(err);
-                    return;
-                }
-                result = data;
-                return;
-            });
-            return result;
-        },
-        getDonation: async (_, { id }, { dataSources }): Promise<Donation> => {
-            var result;
-            const find = await DonationDB.findOne({ _id: id }, function (err, data) {
-                if (err) {
-                    console.log(err);
-                    return;
-                }
-                result = data;
-                return;
-            });
-            return result;
-        },
-        getUpdatesByCampaign: async (_, { campaignid }, { dataSources }): Promise<Update[]> => {
-            var result;
-            const find = await UpdateDB.find({ campaignId: campaignid }, function (err, data) {
-                if (err) {
-                    console.log(err);
-                    return;
-                }
-                result = data;
-                return;
-            });
-            return result;
-        },
-        me: (): User => {
-            return {
-                id: 'U0',
-                name: 'Test 0',
-                doctor: false,
-                date: '2019-01-01T00:00Z',
-            };
-        },
-    },
+	Query: {
+		getUser: async (_, { id }, { dataSources }): Promise<User> => {
+			const result = await UserDB.findOne({_id : Types.ObjectId(id)}, errorHandler);
+			return result;
+		},
+		getDoctors: async (_, { }, { dataSources }): Promise<User[]> => {
+			const result = await UserDB.find({doctor: true}, errorHandler);
+			return result;
+		},
+		getCampaigns: async (_, { }, { dataSources }): Promise<Campaign[]> => {
+			const result = await CampaignDB.find({}, errorHandler);
+			return result;
+		},
+		getCampaignsFiltered: async (_, { filter }, { dataSources }): Promise<Campaign[]> => {
+			const result = await CampaignDB.find(filter, errorHandler);
+			return result;
+		},
+		getDonationsByUser: async (_, { userid }, { dataSources }): Promise<Donation[]> => {
+			const result = await DonationDB.find({userId: Types.ObjectId(userid)}, errorHandler);
+			return result;
+		},
+		getDonationsByCampaign: async (_, { campaignid }, { dataSources }): Promise<Donation[]> => {
+			const result = await DonationDB.find({campaignId: Types.ObjectId(campaignid)}, errorHandler);
+			return result;
+		},
+		getDonation: async (_, { id }, { dataSources }): Promise<Donation> => {
+			const result = await DonationDB.findOne({_id: Types.ObjectId(id)}, errorHandler);
+			return result;
+		},
+		getUpdatesByCampaign: async (_, { campaignid }, { dataSources }): Promise<Update[]> => {
+			const result = await UpdateDB.find({campaignId: Types.ObjectId(campaignid)}, errorHandler);
+			return result;
+		},
+		me: (): User => {
+			return {
+				id: 'U0',
+				name: 'Test 0',
+				doctor: false,
+				date: '2019-01-01T00:00Z',
+			};
+		},
+	},
     Mutation: {
         donate: async (_, { userid, campaignid, amount }, { dataSources }): Promise<Donation> => {
             var data, result;
