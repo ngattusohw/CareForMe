@@ -10,8 +10,7 @@ const app = express();
 const path = '/api/graphql';
 const apolloserver = new ApolloServer({
     typeDefs,
-    resolvers: resolvers as any,
-    mocks: true
+    resolvers: resolvers as any
 });
 apolloserver.applyMiddleware({ app, path });
 
