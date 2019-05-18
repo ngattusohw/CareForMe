@@ -18,12 +18,54 @@ services:
             - '27017:27017'
         networks:
             - cfm
-    mongo-seed:
-        build: ./mongo-seed
+    mongo-seed-user:
+        image: mongo
         links:
             - mongo
+        depends_on:
+            - mongo
+        volumes:
+            - ./mongo-seed:/mongo-seed
         networks:
             - cfm
+        command:
+            "mongoimport --host mongo --port 27017 --db careforme --mode upsert --type json --file /mongo-seed/user.json --jsonArray"
+    mongo-seed-campaign:
+        image: mongo
+        links:
+            - mongo
+        depends_on:
+            - mongo
+        volumes:
+            - ./mongo-seed:/mongo-seed
+        networks:
+            - cfm
+        command:
+            "mongoimport --host mongo --port 27017 --db careforme --mode upsert --type json --file /mongo-seed/campaign.json --jsonArray"
+    mongo-seed-update:
+        image: mongo
+        links:
+            - mongo
+        depends_on:
+            - mongo
+        volumes:
+            - ./mongo-seed:/mongo-seed
+        networks:
+            - cfm
+        command:
+            "mongoimport --host mongo --port 27017 --db careforme --mode upsert --type json --file /mongo-seed/update.json --jsonArray"
+    mongo-seed-donation:
+        image: mongo
+        links:
+            - mongo
+        depends_on:
+            - mongo
+        volumes:
+            - ./mongo-seed:/mongo-seed
+        networks:
+            - cfm
+        command:
+            "mongoimport --host mongo --port 27017 --db careforme --mode upsert --type json --file /mongo-seed/donation.json --jsonArray"
     redis:
         image: redis
         networks:
