@@ -1,83 +1,126 @@
 import { User, Campaign, Update, Donation } from './models';
+import { UserDB, CampaignDB, DonationDB, UpdateDB } from './mongo/mongoSchema';
+
 
 export const resolvers = {
-    Query: {
-        getUser: (_, { id }, { dataSources }): User => {
-            return {
-                id: id,
-                name: 'Test 1',
-                doctor: false,
-                date: '2019-01-01T00:00Z',
-            };
-        },
-        getDoctors: (_, { }, { dataSources }): User[] => {
-            return [
-                {
-                    id: 'U2',
-                    name: 'Test 2',
-                    doctor: true,
-                    date: '2019-01-01T00:00Z',
-                },
-                {
-                    id: 'U3',
-                    name: 'Test 3',
-                    doctor: true,
-                    date: '2019-01-01T00:00Z',
-                },
-                {
-                    id: 'U4',
-                    name: 'Test 4',
-                    doctor: true,
-                    date: '2019-01-01T00:00Z',
-                },
-            ];
-        },
-        getCampaigns: (_, { }, { dataSources }): Campaign[] => {
-            return [
-                {
-                    id: 'C1',
-                    description: 'A test campaign',
-                    creatorid: 'U1',
-                    goal: 400,
-                    recurring: false,
-                    date: '2019-01-02T00:00Z',
-                    donationIds: [],
-                },
-            ];
-        },
-        getCampaignsFiltered: (_, { filter }, { dataSources }): Campaign[] => {
-            return [];
-        },
-        getUpdates: (_, { campaignid }, { dataSources }): Update[] => {
-            return [];
-        },
-        getDonationsByUser: (_, { userid }, { dataSources }): Donation[] => {
-            return [];
-        },
-        getDonationsByCampaign: (_, { campaignid }, { dataSources }): Donation[] => {
-            return [];
-        },
-        getDonation: (_, { id }, { dataSources }): Donation => {
-            return {
-                id: id,
-                userId: 'U2',
-                campaignId: 'C1',
-                amount: 200,
-                date: '2019-01-04T00:00Z',
-            };
-        },
-        getUpdatesByCampaign: (_, { campaignid }, { dataSources }): Update[] => {
-            return [];
-        },
-        me: (_, { }, { dataSources }): User => {
-            return {
-                id: 'U0',
-                name: 'Test 0',
-                doctor: false,
-                date: '2019-01-01T00:00Z',
-            };
-        },
-    },
+	Query: {
+		getUser: async (_, { id }, { dataSources }): Promise<User> => {
+			var result;
+			const find = await UserDB.findOne({_id : id}, function(err, user) {
+				if (err) {
+					console.log(err);
+					return;
+				}
+				result = user;
+				return;
+			});
+			return result;
+		},
+		getDoctors: async (_, { }, { dataSources }): Promise<User[]> => {
+			var result;
+			const find = await UserDB.find({doctor: true}, function(err, doctors) {
+				if (err) {
+					console.log(err);
+					return;
+				}
+				result = doctors;
+				return;
+			});
+			return result;
+		},
+		getCampaigns: async (_, { }, { dataSources }): Promise<Campaign[]> => {
+			var result;
+			const find = await CampaignDB.find({}, function(err, data) {
+				if (err) {
+					console.log(err);
+					return;
+				}
+				result = data;
+				return;
+			});
+			return result;
+		},
+		getCampaignsFiltered: async (_, { filter }, { dataSources }): Promise<Campaign[]> => {
+			var result;
+			const find = await CampaignDB.find(filter, function(err, data) {
+				if (err) {
+					console.log(err);
+					return;
+				}
+				result = data;
+				return;
+			});
+			return result;
+		},
+		getUpdates: async (_, { campaignid }, { dataSources }): Promise<Update[]> => {
+			var result;
+			const find = await UpdateDB.find({campaignId: campaignid}, function(err, data) {
+				if (err) {
+					console.log(err);
+					return;
+				}
+				result = data;
+				return;
+			});
+			return result;
+		},
+		getDonationsByUser: async (_, { userid }, { dataSources }): Promise<Donation[]> => {
+			var result;
+			const find = await DonationDB.find({userId: userid}, function(err, data) {
+				if (err) {
+					console.log(err);
+					return;
+				}
+				result = data;
+				return;
+			});
+			return result;
+		},
+		getDonationsByCampaign: async (_, { campaignid }, { dataSources }): Promise<Donation[]> => {
+			var result;
+			const find = await DonationDB.find({campaignId: campaignid}, function(err, data) {
+				if (err) {
+					console.log(err);
+					return;
+				}
+				result = data;
+				return;
+			});
+			return result;
+		},
+		getDonation: async (_, { id }, { dataSources }): Promise<Donation> => {
+			var result;
+			const find = await DonationDB.find({_id: id}, function(err, data) {
+				if (err) {
+					console.log(err);
+					return;
+				}
+				result = data;
+				return;
+			});
+			return result;
+		},
+		getUpdatesByCampaign: async (_, { campaignid }, { dataSources }): Promise<Update[]> => {
+			var result;
+			const find = await UpdateDB.find({campaignId: campaignid}, function(err, data) {
+				if (err) {
+					console.log(err);
+					return;
+				}
+				result = data;
+				return;
+			});
+			return result;
+		},
+		me: (): User => {
+			return {
+				id: 'U0',
+				name: 'Test 0',
+				doctor: false,
+				date: '2019-01-01T00:00Z',
+			};
+		},
+	},
     Mutation: {
         donate: (_, { campaignid, amount }, { dataSources }): Donation => {
             return {

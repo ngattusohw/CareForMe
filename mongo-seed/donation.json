@@ -1,0 +1,23 @@
+[	
+	{
+		_id: "0",
+		userId: "2",
+		campaignId: "0",
+		amount: 20,
+		date: "a week ago"
+	},
+	{
+		_id: "1",
+		userId: "3",
+		campaignId: "0",
+		amount: 100,
+		date: "a day ago"
+	},
+	{
+		_id: "2",
+		userId: "0",
+		campaignId: "1",
+		amount: 57,
+		date: "a month ago"
+	}
+]
