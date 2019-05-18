@@ -9,12 +9,13 @@ const app = express();
 
 const path = '/api/graphql';
 const apolloserver = new ApolloServer({
-	typeDefs,
-	resolvers: resolvers as any,
+    typeDefs,
+    resolvers: resolvers as any,
+    mocks: true
 });
 apolloserver.applyMiddleware({ app, path });
 
 const server = createServer(app);
 server.listen(PORT, () => {
-	console.log('Server is listening on port ' + PORT);
+    console.log('Server is listening on port ' + PORT);
 });
