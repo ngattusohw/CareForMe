@@ -1,15 +1,15 @@
-import { Document, Schema, Model, model} from "mongoose";
-import { User, Campaign, Update, Donation } from '../models';
+import { Document, Schema, Model, model } from "mongoose";
+import { User, Campaign, Update, Donation } from './models';
 
 const UserSchema: Schema = new Schema({
-	_id: String,
+	_id: Schema.Types.ObjectId,
 	name: String,
 	doctor: Boolean,
 	date: String,
 	bio: String,
 	picture: String
 });
-UserSchema.pre("save", function(next) {
+UserSchema.pre("save", function (next) {
 	let now = new Date();
 	if (!this.date) {
 		this.date = now;
@@ -19,18 +19,18 @@ UserSchema.pre("save", function(next) {
 
 
 const CampaignSchema: Schema = new Schema({
-	_id: String,
+	_id: Schema.Types.ObjectId,
 	description: String,
-	creatorid: String,
+	creatorid: { type: Schema.Types.ObjectId },
 	goal: Number,
 	recurring: Boolean,
 	date: String,
-	doctorid: String,
+	doctorid: { type: Schema.Types.ObjectId },
 	wantsApproval: Boolean,
-	updateIds: [String],
-	donationIds: [String]
+	updateIds: [{ type: Schema.Types.ObjectId }],
+	donationIds: [{ type: Schema.Types.ObjectId }]
 });
-CampaignSchema.pre("save", function(next) {
+CampaignSchema.pre("save", function (next) {
 	let now = new Date();
 	if (!this.date) {
 		this.date = now;
@@ -40,13 +40,13 @@ CampaignSchema.pre("save", function(next) {
 
 
 const UpdateSchema: Schema = new Schema({
-	_id: String,
-	userId: String,
-	campaignId: String,
+	_id: Schema.Types.ObjectId,
+	userId: { type: Schema.Types.ObjectId },
+	campaignId: { type: Schema.Types.ObjectId },
 	comment: String,
 	date: String
 });
-UpdateSchema.pre("save", function(next) {
+UpdateSchema.pre("save", function (next) {
 	let now = new Date();
 	if (!this.date) {
 		this.date = now;
@@ -56,13 +56,13 @@ UpdateSchema.pre("save", function(next) {
 
 
 const DonationSchema: Schema = new Schema({
-	_id: String,
-	userId: String,
-	campaignId: String,
+	_id: Schema.Types.ObjectId,
+	userId: { type: Schema.Types.ObjectId },
+	campaignId: { type: Schema.Types.ObjectId },
 	amount: Number,
 	date: String
 });
-DonationSchema.pre("save", function(next) {
+DonationSchema.pre("save", function (next) {
 	let now = new Date();
 	if (!this.date) {
 		this.date = now;
