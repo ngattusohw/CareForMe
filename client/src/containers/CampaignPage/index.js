@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Segment, Grid, Divider, Card, Header, Icon, Feed } from 'semantic-ui-react';
+import { Container, Segment, Grid, Divider, Card, Header, Icon, Feed, Button, Input, Label } from 'semantic-ui-react';
 import { HomePageNavBar } from '../../components';
 import styles from './CampaignPage.module.css';
 
+const submit = (donationAmount, setErrorMessage) => {
+	if (donationAmount && typeof Number(donationAmount) == 'number') {
+		setErrorMessage('');
+	} else {
+		setErrorMessage('Invalid Donation amount');
+	}
+};
+
+/*Temporary*/
 const donarList = [
 	{
 		name: 'Nick Gattuso',
@@ -13,6 +22,8 @@ const donarList = [
 
 const CampaignPage = ({ campaignId, name }) => {
 	const [donars, setDonars] = useState([]);
+	const [errorMessage, setErrorMessage] = useState('');
+	const [donationAmount, setDonationAmount] = useState('');
 
 	useEffect(() => {
 		setDonars(donarList);
@@ -50,6 +61,32 @@ const CampaignPage = ({ campaignId, name }) => {
 					</Grid>
 					<Divider vertical>Info</Divider>
 				</Segment>
+				{errorMessage ? (
+					<Header as="h4" textAlign="center" color="red">
+						{errorMessage}
+					</Header>
+				) : null}
+				<div className={styles.donateContainer}>
+					<Input labelPosition="right" type="text" placeholder="Amount">
+						<Label basic>$</Label>
+						<input
+							onChange={e => {
+								setDonationAmount(e.target.value);
+							}}
+						/>
+						<Label>.00</Label>
+					</Input>
+					<Button
+						positive
+						size="huge"
+						onClick={() => {
+							submit(donationAmount, setErrorMessage);
+						}}
+					>
+						Donate Now!
+					</Button>
+				</div>
+
 				<Divider horizontal>
 					<Header as="h4">
 						<Icon name="money" />
