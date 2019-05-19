@@ -15,7 +15,7 @@ const doctor_approved = (
 const CampaignListByUser = ({ history, userid }) => {
 	const GET_CAMPAIGNS = gql`
 		{
-			getCampaignsFiltered(filter: { wantsApproval: true, creatorid: "${userid}" }) {
+			getCampaignsFiltered(filter: {creatorid: "${userid}" }) {
         id
         title
         description

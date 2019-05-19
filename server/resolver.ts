@@ -111,6 +111,7 @@ export const resolvers = {
 				donationIds: [],
 				wantsApproval: wantsApproval,
 				creatorName: creatorName,
+				hasApproval: false,
 			});
 			try {
 				result = await data;
