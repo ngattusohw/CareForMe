@@ -86,6 +86,7 @@ export const typeDefs = gql`
 		donate(userid: ID, campaignid: ID, amount: Int, date: String, donatorName: String): Donation
 		update(campaignid: ID, update: UpdateInput): Update
 		createCampaign(
+			title: String
 			description: String
 			creatorid: ID
 			goal: Int

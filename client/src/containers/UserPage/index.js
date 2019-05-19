@@ -1,7 +1,7 @@
 import React from 'react';
 import { Menu, Button, Grid, Segment, Divider, Header } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
-import { CampaignListByUser, DonationListByUser } from '../../components';
+import { CampaignListByUser, DonationListByUser, CreateCampaign } from '../../components';
 import styles from './UserPage.module.css';
 
 const UserPage = ({ history, userid }) => (
@@ -34,6 +34,12 @@ const UserPage = ({ history, userid }) => (
 			</Grid>
 
 			<Divider vertical> My History </Divider>
+		</Segment>
+		<Segment>
+			<Header as="h2" textAlign="center">
+				Create a Campaign!
+			</Header>
+			<CreateCampaign userid={userid} />
 		</Segment>
 	</div>
 );
