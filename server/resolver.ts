@@ -16,7 +16,7 @@ const errorHandler = function(err, data) {
 	}
 	console.log(data);
 	return;
-}
+};
 
 export const resolvers = {
 	Query: {
@@ -52,23 +52,17 @@ export const resolvers = {
 			const result = await UpdateDB.find({campaignId: Types.ObjectId(campaignid)}, errorHandler);
 			return result;
 		},
-		getUserFromSession: async (_, { root, args, context }, { dataSources }): Promise<string> => {
-			const { req } = context;
+		getUserFromSession: async (_, { sessionId }, { dataSources }): Promise<string> => {
 			try {
-				var userId = await client.getAsync(req.session.session_id);
+				var userId = await client.getAsync(sessionId);
 			} catch(err) {
 				console.log(err);
 				return '';
 			}
 			return userId;
 		},
-		me: (): User => {
-			return {
-				id: 'U0',
-				name: 'Test 0',
-				doctor: false,
-				date: '2019-01-01T00:00Z',
-			};
+		me: (_, {}, {context} ): User => {
+			return UserDB.findOne({_id : Types.ObjectId(context.userId)});
 		},
 	},
     Mutation: {
@@ -121,6 +115,10 @@ export const resolvers = {
         },
         createUser: async (_, { name, doctor, bio, picture }, { dataSources }): Promise<User> => {
             var data, result;
+            const existingUser = await UserDB.findOne({name : name}, errorHandler);
+            if (existingUser) {
+            	throw "User with that name already exists";
+            }
             data = UserDB.create({ _id: Types.ObjectId(), name: name, doctor: doctor, bio: bio, picture: picture });
             try {
                 result = await data;
@@ -163,23 +161,24 @@ export const resolvers = {
             });
             return true;
         },
-        newUserSession: async (_, { root, args, context }, { dataSources }): Promise<string> => {
-        	const { req } = context;
+        login: async (_, { name }, { }): Promise<string> => {
+        	const existingUser = await UserDB.findOne({name : name}, errorHandler);
+            if (!existingUser) {
+            	throw "User doesn't exist";
+            }
         	const session_id = uuid();
         	try {
-        		var insertSession = await client.setAsync(session_id, args.id);
+        		var insertSession = await client.setAsync(session_id, existingUser._id);
         		return session_id;
         	} catch (err) {
         		console.log(err);
         		return '';
         	}
-        	
         },
-        deleteSession: async (_, { root, args, context }, { dataSources }): Promise<boolean> => {
-        	const { req } = context;
+        logout: async (_, { }, { context }): Promise<boolean> => {
+        	const { session_id } = context;
         	try {
-        		var deleteSession = await client.delAsync(req.session.session_id);
-        		req.session.expires = Date.now();
+        		var deleteSession = await client.delAsync(session_id);
         		return true;
         	} catch (err) {
         		console.log(err);

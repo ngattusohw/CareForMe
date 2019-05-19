@@ -4,13 +4,19 @@ import { createServer } from 'http';
 import { typeDefs } from './schema';
 import { resolvers } from './resolver';
 import mongoose = require('mongoose');
-import cookieSession = require('cookie-session');
-import bodyParser from 'body-parser';
-import cors from 'cors';
+import * as cors from 'cors';
+const bluebird = require("bluebird");
+const uuid = require("uuid/v4");
+const redis = require("redis");
+const client = redis.createClient();
+
+bluebird.promisifyAll(redis.RedisClient.prototype);
+bluebird.promisifyAll(redis.Multi.prototype);
 
 const PORT = 5555;
 const app = express();
 
+/*
 app.use(
 	cookieSession({
 		name: 'session',
@@ -19,20 +25,39 @@ app.use(
 	})
 );
 
+const link = createHttpLink({
+	uri: '/api/graphql',
+	credentials: 'same-origin'
+});
+*/
+
 const corsOptions = {
    origin: 'http://localhost',
-   credentials: true,
-   methods: ['GET', 'PUT', 'POST', 'OPTIONS'],
+   credentials: true
 };
 
 app.use(cors(corsOptions));
 
 const path = '/api/graphql';
+
+
 const apolloserver = new ApolloServer({
     typeDefs,
     resolvers: resolvers as any,
-    context: ({ req }) => ({ req }),
+    context: async ({ req }) => {
+    	const session_id = (req.headers && req.headers.session_id || '');
+    	var user;
+    	try {
+    		const userId = await client.getAsync(session_id);
+    		user = await resolvers.Query.getUser({}, {id: userId}, {dataSources: null});
+    	} catch(err) {
+    		console.log(err);
+    		return null;
+    	}
+    	return {session_id: session_id, user: user};
+    }
 });
+
 
 apolloserver.applyMiddleware({ app, path, cors: corsOptions });
 
