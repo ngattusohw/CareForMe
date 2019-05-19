@@ -76,6 +76,7 @@ export const typeDefs = gql`
 		getDonationsByCampaign(campaignid: ID): [Donation]!
 		getDonation(id: ID): Donation
 		getUpdatesByCampaign(campaignid: ID): [Update]!
+		getUserFromSession(sessionId: String): String
 		me: User
 	}
 
@@ -95,5 +96,7 @@ export const typeDefs = gql`
 		deleteUser(id: ID): Boolean
 		deleteCampaign(id: ID): Boolean
 		deleteDonationPledge(id: ID): Boolean
+		login(name: String): String
+		logout: Boolean
 	}
 `;

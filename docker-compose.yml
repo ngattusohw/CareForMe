@@ -68,8 +68,13 @@ services:
             "mongoimport --host mongo --port 27017 --db careforme --mode upsert --type json --file /mongo-seed/donation.json --jsonArray"
     redis:
         image: redis
+        container_name: redis-sessions
         networks:
             - cfm
+        expose:
+            - 6379
+        ports:
+            - '6379:6379'
     cfm_server:
         container_name: cfm-server
         restart: always

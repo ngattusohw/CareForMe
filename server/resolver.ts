@@ -1,6 +1,14 @@
 import { User, Campaign, Update, Donation } from './models';
 import { UserDB, CampaignDB, DonationDB, UpdateDB } from './mongoSchema';
 import { Document, Schema, Model, model, Types } from "mongoose";
+const bluebird = require("bluebird");
+const uuid = require("uuid/v4");
+const redis = require("redis");
+const client = redis.createClient('redis://redis-sessions');
+
+bluebird.promisifyAll(redis.RedisClient.prototype);
+bluebird.promisifyAll(redis.Multi.prototype);
+
 
 const errorHandler = function(err, data) {
 	if (err) {
@@ -8,7 +16,7 @@ const errorHandler = function(err, data) {
 	}
 	console.log(data);
 	return;
-}
+};
 
 export const resolvers = {
 	Query: {
@@ -44,13 +52,17 @@ export const resolvers = {
 			const result = await UpdateDB.find({campaignId: Types.ObjectId(campaignid)}, errorHandler);
 			return result;
 		},
-		me: (): User => {
-			return {
-				id: 'U0',
-				name: 'Test 0',
-				doctor: false,
-				date: '2019-01-01T00:00Z',
-			};
+		getUserFromSession: async (_, { sessionId }, { dataSources }): Promise<string> => {
+			try {
+				var userId = await client.getAsync(sessionId);
+			} catch(err) {
+				console.log(err);
+				return '';
+			}
+			return userId;
+		},
+		me: (_, {}, {session_id, user} ): User => {
+			return user;
 		},
 	},
     Mutation: {
@@ -103,6 +115,10 @@ export const resolvers = {
         },
         createUser: async (_, { name, doctor, bio, picture }, { dataSources }): Promise<User> => {
             var data, result;
+            const existingUser = await UserDB.findOne({name : name}, errorHandler);
+            if (existingUser) {
+            	throw "User with that name already exists";
+            }
             data = UserDB.create({ _id: Types.ObjectId(), name: name, doctor: doctor, bio: bio, picture: picture });
             try {
                 result = await data;
@@ -145,5 +161,29 @@ export const resolvers = {
             });
             return true;
         },
+        login: async (_, { name }, { }): Promise<string> => {
+        	const existingUser = await UserDB.findOne({name : name}, errorHandler);
+            if (!existingUser) {
+            	throw "User doesn't exist";
+            }
+        	const session_id = uuid();
+        	try {
+        		var insertSession = await client.setAsync(session_id, existingUser._id);
+        		return session_id;
+        	} catch (err) {
+        		console.log(err);
+        		return '';
+        	}
+        },
+        logout: async (_, { }, { session_id, user }): Promise<boolean> => {
+        	try {
+                console.log(session_id)
+        		var deleteSession = await client.delAsync(session_id);
+        		return true;
+        	} catch (err) {
+        		console.log(err);
+        		return false;
+        	}
+        }
     },
 };
