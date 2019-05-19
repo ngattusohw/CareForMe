@@ -14,7 +14,6 @@ const errorHandler = function(err, data) {
 	if (err) {
 		console.log(err);
 	}
-	console.log(data);
 	return;
 };
 
@@ -167,8 +166,10 @@ export const resolvers = {
             	throw "User doesn't exist";
             }
         	const session_id = uuid();
+            // how many seconds each session will persist
+            const expiration = 12 * 60 * 60;
         	try {
-        		var insertSession = await client.setAsync(session_id, existingUser._id);
+        		var insertSession = await client.setAsync(session_id, existingUser._id.toString(), 'EX', expiration);
         		return session_id;
         	} catch (err) {
         		console.log(err);
@@ -177,8 +178,9 @@ export const resolvers = {
         },
         logout: async (_, { }, { session_id, user }): Promise<boolean> => {
         	try {
-                console.log(session_id)
-        		var deleteSession = await client.delAsync(session_id);
+                if (user) {
+        		    var deleteSession = await client.delAsync(session_id);
+                }
         		return true;
         	} catch (err) {
         		console.log(err);
