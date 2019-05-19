@@ -2,7 +2,7 @@
 	{
 		"_id": ObjectId("9e200ca2f124727e7ff8d69d"),
 		"title": "My nose is stuffy",
-		"description": "Pls help",
+		"description": "I need the money to buy some clariton",
 		"creatorid": ObjectId("3ca48c5a9baad1bff84a3267"),
 		"goal": 500000,
 		"recurring": true,
@@ -15,9 +15,20 @@
 	{
 		"_id": ObjectId("f87fec8d9687014bb173c3bb"),
 		"title": "I broke both my arms",
-		"description": "Bro I'm straight up not having a good time",
+		"description": "I'm straight up not having a good time",
 		"creatorid": ObjectId("6e51c7a2bcf244830db70ffa"),
 		"goal": 40000,
+		"recurring": false,
+		"date": "yesterday",
+		"wantsApproval": false,
+		"creatorName": "Bill elwell"
+	},
+	{
+		"_id": ObjectId("f87fec8d9687014bb173c3bc"),
+		"title": "Type I Diabetes",
+		"description": "Every month, my non-insurance reimbursable out-of-pocket expenses are too much! Please help me survive",
+		"creatorid": ObjectId("6e51c7a2bcf244830db70ffa"),
+		"goal": 700,
 		"recurring": false,
 		"date": "yesterday",
 		"wantsApproval": false,

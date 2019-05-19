@@ -4,7 +4,7 @@
 		"name": "Austin Powers",
 		"doctor": true,
 		"date": "today",
-		"bio": "yeah baby",
+		"bio": "Austin Powers is your friendly neighborhood guy, who loves milk.",
 		"picture": "no"
 	},
 	{
@@ -12,15 +12,15 @@
 		"name": "Testy McTest",
 		"doctor": false,
 		"date": "today",
-		"bio": "xd",
+		"bio": "Testy McTests favorite instrument is a pineapple",
 		"picture": "nope"
 	},
 	{
 		"_id": ObjectId("7b0a8f8fb4ccf0a901bedf36"),
 		"name": "Jenny Craig",
 		"doctor": true,
-		"date": "tmrw",
-		"bio": "eat me",
+		"date": "today",
+		"bio": "With a P.H.D in neuroscience, shes the best",
 		"picture": "yikes"
 	},
 	{
