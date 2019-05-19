@@ -19,6 +19,7 @@ export interface Campaign extends Document {
 	date: string;
 	doctorid?: string;
 	wantsApproval?: boolean;
+	hasApproval?: boolean;
 }
 
 export interface Update extends Document {
