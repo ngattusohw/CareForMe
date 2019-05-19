@@ -12,7 +12,7 @@ const doctor_approved = (
 );
 
 const CampaignListByUser = ({ history }) => {
-	let userid = '6e51c7a2bcf244830db70ffa';
+	let userid = '3ca48c5a9baad1bff84a3267';
 	const GET_CAMPAIGNS = gql`
 		{
 			getCampaignsFiltered(filter: { wantsApproval: true, creatorid: "${userid}" }) {
@@ -22,6 +22,7 @@ const CampaignListByUser = ({ history }) => {
         creatorName
         wantsApproval
         hasApproval
+        goal
 			}
 		}
 	`;
@@ -33,48 +34,50 @@ const CampaignListByUser = ({ history }) => {
 				if (error) return `Error! ${error.message}`;
 				return (
 					<div className={styles.cardContainer}>
-						{data.getCampaigns.map(a => (
-							<div className={styles.element}>
-								{a.hasApproval ? (
-									<Card
-										key={a.id}
-										header={a.title}
-										meta={`Goal of $${a.goal}`}
-										description={a.description}
-										extra={doctor_approved}
-										onClick={() => {
-											history.push({
-												pathname: `/campaign/${a.id.toLowerCase()}`,
-												state: {
-													name: a.creatorName,
-													description: a.description,
-													goal: a.goal,
-													title: a.title,
-												},
-											});
-										}}
-									/>
-								) : (
-									<Card
-										key={a.id}
-										header={a.title}
-										meta={`${a.creatorName} has a goal of $${a.goal}`}
-										description={a.description}
-										onClick={() => {
-											history.push({
-												pathname: `/campaign/${a.id.toLowerCase()}`,
-												state: {
-													name: a.creatorName,
-													description: a.description,
-													goal: a.goal,
-													title: a.title,
-												},
-											});
-										}}
-									/>
-								)}
-							</div>
-						))}
+						{data.getCampaignsFiltered.length === 0
+							? 'No campaigns yet! Create one below'
+							: data.getCampaignsFiltered.map(a => (
+									<div className={styles.element}>
+										{a.hasApproval ? (
+											<Card
+												key={a.id}
+												header={a.title}
+												meta={`Goal of $${a.goal}`}
+												description={a.description}
+												extra={doctor_approved}
+												onClick={() => {
+													history.push({
+														pathname: `/campaign/${a.id.toLowerCase()}`,
+														state: {
+															name: a.creatorName,
+															description: a.description,
+															goal: a.goal,
+															title: a.title,
+														},
+													});
+												}}
+											/>
+										) : (
+											<Card
+												key={a.id}
+												header={a.title}
+												meta={`${a.creatorName} has a goal of $${a.goal}`}
+												description={a.description}
+												onClick={() => {
+													history.push({
+														pathname: `/campaign/${a.id.toLowerCase()}`,
+														state: {
+															name: a.creatorName,
+															description: a.description,
+															goal: a.goal,
+															title: a.title,
+														},
+													});
+												}}
+											/>
+										)}
+									</div>
+							  ))}
 					</div>
 				);
 			}}
@@ -82,4 +85,4 @@ const CampaignListByUser = ({ history }) => {
 	);
 };
 
-export default CampaignListByUser;
+export default withRouter(CampaignListByUser);
