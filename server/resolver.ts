@@ -1,6 +1,14 @@
 import { User, Campaign, Update, Donation } from './models';
 import { UserDB, CampaignDB, DonationDB, UpdateDB } from './mongoSchema';
 import { Document, Schema, Model, model, Types } from "mongoose";
+const bluebird = require("bluebird");
+const uuid = require("uuid/v4");
+const redis = require("redis");
+const client = redis.createClient();
+
+bluebird.promisifyAll(redis.RedisClient.prototype);
+bluebird.promisifyAll(redis.Multi.prototype);
+
 
 const errorHandler = function(err, data) {
 	if (err) {
@@ -43,6 +51,16 @@ export const resolvers = {
 		getUpdatesByCampaign: async (_, { campaignid }, { dataSources }): Promise<Update[]> => {
 			const result = await UpdateDB.find({campaignId: Types.ObjectId(campaignid)}, errorHandler);
 			return result;
+		},
+		getUserFromSession: async (_, { root, args, context }, { dataSources }): Promise<string> => {
+			const { req } = context;
+			try {
+				var userId = await client.getAsync(req.session.session_id);
+			} catch(err) {
+				console.log(err);
+				return '';
+			}
+			return userId;
 		},
 		me: (): User => {
 			return {
@@ -134,5 +152,28 @@ export const resolvers = {
             });
             return true;
         },
+        newUserSession: async (_, { root, args, context }, { dataSources }): Promise<string> => {
+        	const { req } = context;
+        	const session_id = uuid();
+        	try {
+        		var insertSession = await client.setAsync(session_id, args.id);
+        		return session_id;
+        	} catch (err) {
+        		console.log(err);
+        		return '';
+        	}
+        	
+        },
+        deleteSession: async (_, { root, args, context }, { dataSources }): Promise<boolean> => {
+        	const { req } = context;
+        	try {
+        		var deleteSession = await client.delAsync(req.session.session_id);
+        		req.session.expires = Date.now();
+        		return true;
+        	} catch (err) {
+        		console.log(err);
+        		return false;
+        	}
+        }
     },
 };
