@@ -15,7 +15,7 @@ const CREATE_CAMPAIGN = gql`
 		$creatorName: String!
 	) {
 		createCampaign(
-			title: String
+			title: $title
 			description: $description
 			creatorid: $creatorid
 			goal: $goal
@@ -33,7 +33,12 @@ const CreateCampaign = ({ userid }) => {
 	const [description, setDescription] = useState('');
 	const [goal, setGoal] = useState('');
 	const [creatorName, setCreatorName] = useState('');
+	const [doctorApproval, setDoctorApproval] = useState(false);
+	const [recurring, setRecurring] = useState(false);
 
+	const handleToggle = (v, f) => {
+		f(!v);
+	};
 	return (
 		<Mutation mutation={CREATE_CAMPAIGN}>
 			{(createCampaign, { data, error, loading }) => {
@@ -71,28 +76,44 @@ const CreateCampaign = ({ userid }) => {
 						<Input
 							type="text"
 							className={styles.element}
-							placeholder="Creator Name"
+							placeholder="Your name"
 							onChange={e => {
 								setCreatorName(e.target.value);
 							}}
 						/>
-						<Checkbox className={styles.element} toggle label={{ children: 'Requires Doctor Approval' }} />
-						<Checkbox className={styles.element} toggle label={{ children: 'Recurring' }} />
+						<Checkbox
+							className={styles.element}
+							toggle
+							label={{ children: 'Requires Doctor Approval' }}
+							onClick={() => {
+								handleToggle(doctorApproval, setDoctorApproval);
+							}}
+						/>
+						<Checkbox
+							className={styles.element}
+							toggle
+							label={{ children: 'Recurring' }}
+							onClick={() => {
+								handleToggle(recurring, setRecurring);
+							}}
+						/>
 						<Button
 							className={styles.element}
 							positive
 							size="small"
 							onClick={() => {
-								console.log(userid, goal, title, description);
-								// createCampaign({
-								// 	variables: {
-								// 		title: title,
-								// 		description: description,
-								// 		creatorid: userid,
-								// 		creatorName: creatorName
-
-								// 	},
-								// });
+								console.log(userid, goal, title, description, doctorApproval, recurring);
+								createCampaign({
+									variables: {
+										title: title,
+										description: description,
+										creatorid: userid,
+										creatorName: creatorName,
+										goal: parseInt(goal, 10),
+										recurring: recurring,
+										wantsApproval: doctorApproval,
+									},
+								});
 							}}
 						>
 							Create a Campaign!
