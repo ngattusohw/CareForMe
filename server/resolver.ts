@@ -29,7 +29,7 @@ export const resolvers = {
 			return result;
 		},
 		getCampaigns: async (_, { }, { dataSources }): Promise<Campaign[]> => {
-			const result = await CampaignDB.find({}, errorHandler);
+			const result = await CampaignDB.find({ hasApproval: { $ne: false}}, errorHandler);
 			return result;
 		},
 		getCampaignsFiltered: async (_, { filter }, { dataSources }): Promise<Campaign[]> => {
@@ -93,6 +93,7 @@ export const resolvers = {
             return result;
         },
         createCampaign: async (_, {
+            title,
             description,
             creatorid,
             goal,
@@ -100,13 +101,23 @@ export const resolvers = {
             wantsApproval }, { dataSources }
         ): Promise<Campaign> => {
             var data, result;
-            data = CampaignDB.create({ _id: Types.ObjectId(), description: description, creatorid: Types.ObjectId(creatorid), goal: goal, recurring: recurring, donationIds: [], wantsApproval: wantsApproval });
+            data = CampaignDB.create({ _id: Types.ObjectId(), title: title, description: description, creatorid: Types.ObjectId(creatorid), goal: goal, recurring: recurring, donationIds: [], wantsApproval: wantsApproval });
             try {
                 result = await data;
             } catch (err) {
                 throw err;
             }
             return result;
+        },
+        approveCampaign: async (_, { id }, { dataSources }): Promise<Campaign> => {
+        	var data, result;
+        	data = CampaignDB.findOneAndUpdate({ _id: Types.ObjectId(id)}, { $set: { hasApproval: true } });
+        	try {
+        		result = await data;
+        	} catch (err) {
+        		throw err;
+        	}
+        	return result;
         },
         createUser: async (_, { name, doctor, bio, picture }, { dataSources }): Promise<User> => {
             var data, result;
@@ -120,7 +131,7 @@ export const resolvers = {
         },
         updateUser: async (_, { id, user }, { dataSources }): Promise<User> => {
             var data, result;
-            data = UserDB.updateOne({ _id: Types.ObjectId(id) }, { $set: { user } });
+            data = UserDB.findOneAndUpdate({ _id: Types.ObjectId(id) }, { $set: { user } });
             try {
                 result = await data;
             } catch (err) {

@@ -20,6 +20,7 @@ export const typeDefs = gql`
 
 	type Campaign {
 		id: ID!
+		title: String!
 		description: String!
 		creatorid: ID!
 		goal: Int!
@@ -27,9 +28,11 @@ export const typeDefs = gql`
 		date: String!
 		doctorid: ID
 		wantsApproval: Boolean
+		hasApproval: Boolean
 	}
 
 	input CampaignInput {
+		title: String
 		description: String
 		creatorid: ID
 		goal: Int
@@ -37,6 +40,7 @@ export const typeDefs = gql`
 		date: String
 		doctorid: ID
 		wantsApproval: Boolean
+		hasApproval: Boolean
 	}
 
 	type Update {
@@ -85,6 +89,7 @@ export const typeDefs = gql`
 			recurring: Boolean
 			wantsApproval: Boolean
 		): Campaign
+		approveCampaign(id: ID): Campaign
 		createUser(name: String, date: String, doctor: Boolean, bio: String, picture: String): User
 		updateUser(id: ID, user: UserInput): User
 		deleteUser(id: ID): Boolean

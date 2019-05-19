@@ -20,13 +20,15 @@ UserSchema.pre("save", function (next) {
 
 const CampaignSchema: Schema = new Schema({
 	_id: Schema.Types.ObjectId,
+	title: String,
 	description: String,
 	creatorid: { type: Schema.Types.ObjectId },
 	goal: Number,
 	recurring: Boolean,
 	date: String,
 	doctorid: { type: Schema.Types.ObjectId },
-	wantsApproval: Boolean
+	wantsApproval: Boolean,
+	hasApproval: Boolean
 }, { versionKey: false });
 CampaignSchema.pre("save", function (next) {
 	let now = new Date();

@@ -21,7 +21,7 @@ const submit = async (u, p, t, history, setErrorMessage) => {
 		// 	});
 		// }
 		history.push({
-			pathname: `/${t.toLowerCase()}`,
+			pathname: `/${t.toLowerCase()}/1`,
 			state: {
 				username: u,
 			},

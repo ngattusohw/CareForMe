@@ -11,6 +11,7 @@ export interface User extends Document {
 
 export interface Campaign extends Document {
 	id: string;
+	title: String;
 	description: string;
 	creatorid: string;
 	goal: number;
@@ -18,6 +19,7 @@ export interface Campaign extends Document {
 	date: string;
 	doctorid?: string;
 	wantsApproval?: boolean;
+	hasApproval?: boolean;
 }
 
 export interface Update extends Document {
