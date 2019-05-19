@@ -62,6 +62,22 @@ export const resolvers = {
 		me: (_, {}, { session_id, user }): User => {
 			return user;
 		},
+        login: async (_, { name }, {}): Promise<string> => {
+            const existingUser = await UserDB.findOne({ name: name }, errorHandler);
+            if (!existingUser) {
+                return null;
+            }
+            const session_id = uuid();
+            // how many seconds each session will persist
+            const expiration = 12 * 60 * 60;
+            try {
+                var insertSession = await client.setAsync(session_id, existingUser._id.toString(), 'EX', expiration);
+                return session_id;
+            } catch (err) {
+                console.log(err);
+                return null;
+            }
+        },
 	},
 	Mutation: {
 		donate: async (_, { userid, campaignid, amount, donatorName }, { dataSources }): Promise<Donation> => {
@@ -172,22 +188,6 @@ export const resolvers = {
 				}
 			});
 			return true;
-		},
-		login: async (_, { name }, {}): Promise<string> => {
-			const existingUser = await UserDB.findOne({ name: name }, errorHandler);
-			if (!existingUser) {
-				throw "User doesn't exist";
-			}
-			const session_id = uuid();
-			// how many seconds each session will persist
-			const expiration = 12 * 60 * 60;
-			try {
-				var insertSession = await client.setAsync(session_id, existingUser._id.toString(), 'EX', expiration);
-				return session_id;
-			} catch (err) {
-				console.log(err);
-				return '';
-			}
 		},
 		logout: async (_, {}, { session_id, user }): Promise<boolean> => {
 			try {

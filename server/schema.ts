@@ -80,6 +80,7 @@ export const typeDefs = gql`
 		getUpdatesByCampaign(campaignid: ID): [Update]!
 		getUserFromSession(sessionId: String): String
 		me: User
+		login(name: String): String
 	}
 
 	type Mutation {
@@ -99,7 +100,6 @@ export const typeDefs = gql`
 		deleteUser(id: ID): Boolean
 		deleteCampaign(id: ID): Boolean
 		deleteDonationPledge(id: ID): Boolean
-		login(name: String): String
 		logout: Boolean
 	}
 `;
