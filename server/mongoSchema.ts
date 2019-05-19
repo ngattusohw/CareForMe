@@ -27,7 +27,8 @@ const CampaignSchema: Schema = new Schema({
 	recurring: Boolean,
 	date: String,
 	doctorid: { type: Schema.Types.ObjectId },
-	wantsApproval: Boolean
+	wantsApproval: Boolean,
+	hasApproval: Boolean
 }, { versionKey: false });
 CampaignSchema.pre("save", function (next) {
 	let now = new Date();
