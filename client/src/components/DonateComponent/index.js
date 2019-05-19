@@ -5,7 +5,7 @@ import styles from './DonateComponent.module.css';
 import { Button, Label, Input } from 'semantic-ui-react';
 
 const ADD_DONATION = gql`
-	mutation AddDontation($amount: Int!, $campaignid: String!, $userid: String!) {
+	mutation AddDontation($amount: Int!, $campaignid: ID!, $userid: ID!) {
 		donate(userid: $userid, campaignid: $campaignid, amount: $amount) {
 			id
 		}

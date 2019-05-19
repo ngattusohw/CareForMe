@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Menu, Button, Card, Segment, Feed, Icon, Header } from 'semantic-ui-react';
+import { CampaignApprovalList } from '../../components';
 import styles from './DoctorPage.module.css';
 
 const submit = (status, cId) => {
@@ -44,43 +45,7 @@ const DoctorPage = ({ history }) => {
 				Welcome, Dr.
 			</Header>
 			<Segment>
-				<div className={styles.feedContainer}>
-					<Feed>
-						{approvalQueue.map(c => (
-							<Card key={c.name}>
-								<Card.Content>
-									{/* <Image floated="right" size="mini" src="/images/avatar/large/steve.jpg" /> */}
-									<Card.Header>{c.name}</Card.Header>
-									<Card.Meta>{c.amount}</Card.Meta>
-									<Card.Description>{c.description}</Card.Description>
-								</Card.Content>
-								<Card.Content extra>
-									<div className="ui two buttons">
-										<Button
-											basic
-											color="green"
-											onClick={() => {
-												submit(true, c.campaignId);
-											}}
-										>
-											Approve
-										</Button>
-										<Button
-											basic
-											color="red"
-											onClick={() => {
-												submit(false, c.campaignId);
-											}}
-										>
-											Decline
-										</Button>
-									</div>
-								</Card.Content>
-							</Card>
-						))}
-					</Feed>
-					<Button fluid onClick={() => {}} content="Load more" />
-				</div>
+				<CampaignApprovalList />
 			</Segment>
 		</div>
 	);
