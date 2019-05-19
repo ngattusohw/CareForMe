@@ -33,24 +33,6 @@ input:focus {
 	justify-content: space-between;
 }
 
-.submitButton {
-	width: 100%;
-	/* width: 10rem; */
-	height: 4rem;
-	margin-top: 1rem;
-	background-color: rgba(53, 135, 164, 1);
-	outline: none;
-	text-decoration: none;
-	border: none;
-	color: white;
-	padding: 15px 32px;
-	text-align: center;
-	display: inline-block;
-	font-size: 16px;
-	border-radius: 4px;
-	letter-spacing: 0.1rem;
-}
-
 .roleButtonContainer {
 	width: 100%;
 	display: flex;

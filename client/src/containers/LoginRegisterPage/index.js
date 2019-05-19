@@ -3,33 +3,8 @@ import shortid from 'shortid';
 import { withRouter } from 'react-router-dom';
 import styles from './LoginRegisterPage.module.css';
 import img from '../../images/logo_transparent.png';
+import { LoginComponent } from '../../components';
 
-const submit = async (u, p, t, history, setErrorMessage) => {
-	if (!t) {
-		setErrorMessage('Please select a user type');
-		return;
-	}
-	try {
-		// const resp = await postLoginUser(u, p, t);
-		// if (resp.success) {
-		// 	setErrorMessage('');
-		// 	history.push({
-		// 		pathname: `/${t.toLowerCase()}`,
-		// 		state: {
-		// 			username: u,
-		// 		},
-		// 	});
-		// }
-		history.push({
-			pathname: `/${t.toLowerCase()}/1`,
-			state: {
-				username: u,
-			},
-		});
-	} catch (e) {
-		setErrorMessage('Login failed! Username or password is incorrect');
-	}
-};
 
 const LoginRegisterPage = ({ history }) => {
 	const [usertype, setUserType] = useState('');
@@ -68,12 +43,7 @@ const LoginRegisterPage = ({ history }) => {
 					{errorMessage ? <h3 style={{ color: 'red' }}>{errorMessage}</h3> : null}
 					<input type="text" placeholder={'Username'} onChange={e => setUsername(e.target.value)} />
 					<input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
-					<button
-						className={styles.submitButton}
-						onClick={() => submit(username, password, usertype, history, setErrorMessage)}
-					>
-						Submit
-					</button>
+					<LoginComponent name={username, usertype, history, setErrorMessage} / >
 				</div>
 			</div>
 			<div
