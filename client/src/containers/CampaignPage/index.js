@@ -11,7 +11,7 @@ const submit = (donationAmount, setErrorMessage) => {
 	}
 };
 
-const CampaignPage = ({ campaignId, name }) => {
+const CampaignPage = ({ campaignId, name, title, description, goal }) => {
 	const [errorMessage, setErrorMessage] = useState('');
 	const [donationAmount, setDonationAmount] = useState('');
 
@@ -32,16 +32,8 @@ const CampaignPage = ({ campaignId, name }) => {
 						<Grid.Column>
 							<Segment>
 								<Container>
-									<p>
-										{' '}
-										Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula
-										eget dolor. Aenean massa strong. Cum sociis natoque penatibus et magnis dis
-										parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec,
-										pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede
-										justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus
-										ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede link mollis
-										pretium.{' '}
-									</p>
+									<Header as="h2">{title}</Header>
+									<p>{description}</p>
 								</Container>
 							</Segment>
 						</Grid.Column>

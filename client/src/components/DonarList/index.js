@@ -33,7 +33,9 @@ const DonarList = ({ campaignId }) => {
 										<Feed.Event>
 											<Feed.Content>
 												<Feed.Date content={d.date} />
-												<Feed.Summary>{`${d.donatorName} donated $${d.amount}`}</Feed.Summary>
+												<Feed.Summary>{`${
+													d.donatorName ? d.donatorName : `Anonymous`
+												} donated $${d.amount}`}</Feed.Summary>
 											</Feed.Content>
 										</Feed.Event>
 									))}

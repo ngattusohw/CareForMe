@@ -19,6 +19,7 @@ const GET_CAMPAIGNS = gql`
 			wantsApproval
 			goal
 			title
+			creatorName
 		}
 	}
 `;
@@ -43,7 +44,10 @@ const CampaignList = ({ history }) => (
 										history.push({
 											pathname: `/campaign/${a.id.toLowerCase()}`,
 											state: {
-												user: a.id,
+												name: a.creatorName,
+												description: a.description,
+												goal: a.goal,
+												title: a.title,
 											},
 										});
 									}}
@@ -52,13 +56,16 @@ const CampaignList = ({ history }) => (
 								<Card
 									key={a.id}
 									header={a.title}
-									meta={`Goal of $${a.goal}`}
+									meta={`${a.creatorName} has a goal of $${a.goal}`}
 									description={a.description}
 									onClick={() => {
 										history.push({
 											pathname: `/campaign/${a.id.toLowerCase()}`,
 											state: {
-												user: a.id,
+												name: a.creatorName,
+												description: a.description,
+												goal: a.goal,
+												title: a.title,
 											},
 										});
 									}}

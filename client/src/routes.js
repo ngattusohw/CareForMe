@@ -24,9 +24,9 @@ export default [
 				params: { campaignId = '' },
 			},
 			location: {
-				state: { name = '' },
+				state: { name = '', description = '', goal = '', title = '' },
 			},
-		}) => <CampaignPage campaignId={campaignId} name={name} />,
+		}) => <CampaignPage campaignId={campaignId} name={name} description={description} goal={goal} title={title} />,
 	},
 	{
 		path: '/doctor/:doctorId',
