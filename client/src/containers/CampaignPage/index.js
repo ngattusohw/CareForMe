@@ -3,7 +3,7 @@ import { Container, Segment, Grid, Divider, Card, Header, Icon } from 'semantic-
 import { HomePageNavBar, DonarList, DonateComponent } from '../../components';
 import styles from './CampaignPage.module.css';
 
-const CampaignPage = ({ campaignId, name, title, description, goal }) => {
+const CampaignPage = ({ campaignId, name, title, description, goal, date }) => {
 	return (
 		<div>
 			<HomePageNavBar />

@@ -20,6 +20,7 @@ const GET_CAMPAIGNS = gql`
 			goal
 			title
 			creatorName
+			date
 		}
 	}
 `;
@@ -48,6 +49,7 @@ const CampaignList = ({ history }) => (
 												description: a.description,
 												goal: a.goal,
 												title: a.title,
+												date: a.date,
 											},
 										});
 									}}
@@ -66,6 +68,7 @@ const CampaignList = ({ history }) => (
 												description: a.description,
 												goal: a.goal,
 												title: a.title,
+												date: a.date,
 											},
 										});
 									}}
