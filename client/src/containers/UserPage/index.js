@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, Button, Grid, Segment, Divider } from 'semantic-ui-react';
+import { Menu, Button, Grid, Segment, Divider, Header } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
 import { CampaignListByUser } from '../../components';
 import styles from './UserPage.module.css';
@@ -20,6 +20,9 @@ const UserPage = ({ history }) => (
 		<Segment>
 			<Grid columns={2} relaxed="very">
 				<Grid.Column>
+					<Header as="h2" textAlign="center">
+						Campaign History
+					</Header>
 					<CampaignListByUser />
 				</Grid.Column>
 				<Grid.Column>Hi</Grid.Column>
