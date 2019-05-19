@@ -6,30 +6,14 @@ import { resolvers } from './resolver';
 import mongoose = require('mongoose');
 import * as cors from 'cors';
 const bluebird = require("bluebird");
-const uuid = require("uuid/v4");
 const redis = require("redis");
-const client = redis.createClient();
+const client = redis.createClient('redis://redis-sessions');
 
 bluebird.promisifyAll(redis.RedisClient.prototype);
 bluebird.promisifyAll(redis.Multi.prototype);
 
 const PORT = 5555;
 const app = express();
-
-/*
-app.use(
-	cookieSession({
-		name: 'session',
-		keys: 'secret',
-		maxAge: 6 * 60 * 60 * 1000,
-	})
-);
-
-const link = createHttpLink({
-	uri: '/api/graphql',
-	credentials: 'same-origin'
-});
-*/
 
 const corsOptions = {
    origin: 'http://localhost',

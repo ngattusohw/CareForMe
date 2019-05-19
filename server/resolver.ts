@@ -4,7 +4,7 @@ import { Document, Schema, Model, model, Types } from "mongoose";
 const bluebird = require("bluebird");
 const uuid = require("uuid/v4");
 const redis = require("redis");
-const client = redis.createClient();
+const client = redis.createClient('redis://redis-sessions');
 
 bluebird.promisifyAll(redis.RedisClient.prototype);
 bluebird.promisifyAll(redis.Multi.prototype);
@@ -61,8 +61,8 @@ export const resolvers = {
 			}
 			return userId;
 		},
-		me: (_, {}, {context} ): User => {
-			return UserDB.findOne({_id : Types.ObjectId(context.userId)});
+		me: (_, {}, {session_id, user} ): User => {
+			return user;
 		},
 	},
     Mutation: {
@@ -175,9 +175,9 @@ export const resolvers = {
         		return '';
         	}
         },
-        logout: async (_, { }, { context }): Promise<boolean> => {
-        	const { session_id } = context;
+        logout: async (_, { }, { session_id, user }): Promise<boolean> => {
         	try {
+                console.log(session_id)
         		var deleteSession = await client.delAsync(session_id);
         		return true;
         	} catch (err) {
