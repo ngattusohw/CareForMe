@@ -37,5 +37,5 @@ export interface Donation extends Document {
 	campaignId: string;
 	amount: number;
 	date: string;
-	donatorName: string;
+	donatorName?: string;
 }

@@ -5,14 +5,14 @@ import styles from './DonateComponent.module.css';
 import { Button, Label, Input } from 'semantic-ui-react';
 
 const ADD_DONATION = gql`
-	mutation AddDonation($amount: Int!, $campaignid: String!, $userid: String!) {
-		donate(userid: $userid, campaignid: $campaignid, amount: $amount) {
+	mutation AddDonation($amount: Int!, $campaignid: ID!, $userid: ID!, $donatorName: String!) {
+		donate(userid: $userid, campaignid: $campaignid, amount: $amount, donatorName: $donatorName) {
 			id
 		}
 	}
 `;
 
-const DonateComponent = ({ campaignId, userid }) => {
+const DonateComponent = ({ campaignId, userid, donatorName }) => {
 	const [donationValue, setDonationValue] = useState(0);
 
 	return (
@@ -35,11 +35,13 @@ const DonateComponent = ({ campaignId, userid }) => {
 							positive
 							size="huge"
 							onClick={() => {
+								console.log(userid, campaignId, donationValue);
 								donate({
 									variables: {
 										amount: parseInt(donationValue, 10),
 										campaignid: campaignId,
 										userid: userid,
+										donatorName: donatorName ? donatorName : 'Anonymous',
 									},
 								});
 							}}

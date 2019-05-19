@@ -65,7 +65,7 @@ export const typeDefs = gql`
 		campaignId: ID!
 		amount: Int!
 		date: String!
-		donatorName: String!
+		donatorName: String
 	}
 
 	type Query {

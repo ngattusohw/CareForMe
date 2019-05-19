@@ -4,7 +4,7 @@
 		"userId": ObjectId("7b0a8f8fb4ccf0a901bedf36"),
 		"campaignId": ObjectId("9e200ca2f124727e7ff8d69d"),
 		"amount": 20,
-		"date": "a week ago",
+		"date": "5/2/19",
 		"donatorName": "Billy Boy"
 	},
 	{
@@ -12,7 +12,7 @@
 		"userId": ObjectId("6e51c7a2bcf244830db70ffa"),
 		"campaignId": ObjectId("9e200ca2f124727e7ff8d69d"),
 		"amount": 100,
-		"date": "a day ago",
+		"date": "4/20/19",
 		"donatorName": "Nick"
 	},
 	{
@@ -20,7 +20,7 @@
 		"userId": ObjectId("6866bda4257abc9e23c77113"),
 		"campaignId": ObjectId("f87fec8d9687014bb173c3bb"),
 		"amount": 57,
-		"date": "a month ago",
+		"date": "3/3/18",
 		"donatorName": "Jimbo"
 	}
 ]

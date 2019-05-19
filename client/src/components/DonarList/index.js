@@ -1,7 +1,7 @@
 import React from 'react';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
-import { Card, Feed } from 'semantic-ui-react';
+import { Card, Feed, Divider } from 'semantic-ui-react';
 import styles from './DonarList.module.css';
 
 const DonarList = ({ campaignId }) => {
@@ -32,10 +32,11 @@ const DonarList = ({ campaignId }) => {
 									{data.getDonationsByCampaign.map(d => (
 										<Feed.Event>
 											<Feed.Content>
-												<Feed.Date content={d.date} />
+												<Feed.Date content={new Date(d.date).toLocaleDateString('en-US')} />
 												<Feed.Summary>{`${
 													d.donatorName ? d.donatorName : `Anonymous`
 												} donated $${d.amount}`}</Feed.Summary>
+												<Divider />
 											</Feed.Content>
 										</Feed.Event>
 									))}

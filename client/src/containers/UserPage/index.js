@@ -1,7 +1,8 @@
 import React from 'react';
-import styles from './UserPage.module.css';
 import { Menu, Button, Grid, Segment, Divider } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
+import { CampaignListByUser } from '../../components';
+import styles from './UserPage.module.css';
 
 const UserPage = ({ history }) => (
 	<div>
@@ -18,7 +19,9 @@ const UserPage = ({ history }) => (
 		</Menu>
 		<Segment>
 			<Grid columns={2} relaxed="very">
-				<Grid.Column>Hi</Grid.Column>
+				<Grid.Column>
+					<CampaignListByUser />
+				</Grid.Column>
 				<Grid.Column>Hi</Grid.Column>
 			</Grid>
 

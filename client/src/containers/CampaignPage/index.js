@@ -39,7 +39,7 @@ const CampaignPage = ({ campaignId, name, title, description, goal }) => {
 					</Grid>
 					<Divider vertical>Info</Divider>
 				</Segment>
-				<DonateComponent campaignId={campaignId} />
+				<DonateComponent campaignId={campaignId} userid={'6e51c7a2bcf244830db70ffa'} />
 				<Divider horizontal>
 					<Header as="h4">
 						<Icon name="money" />
