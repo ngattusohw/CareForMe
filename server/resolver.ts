@@ -75,6 +75,7 @@ export const resolvers = {
             return result;
         },
         createCampaign: async (_, {
+            title,
             description,
             creatorid,
             goal,
@@ -82,7 +83,7 @@ export const resolvers = {
             wantsApproval }, { dataSources }
         ): Promise<Campaign> => {
             var data, result;
-            data = CampaignDB.create({ _id: Types.ObjectId(), description: description, creatorid: Types.ObjectId(creatorid), goal: goal, recurring: recurring, donationIds: [], wantsApproval: wantsApproval });
+            data = CampaignDB.create({ _id: Types.ObjectId(), title: title, description: description, creatorid: Types.ObjectId(creatorid), goal: goal, recurring: recurring, donationIds: [], wantsApproval: wantsApproval });
             try {
                 result = await data;
             } catch (err) {
