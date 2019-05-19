@@ -11,8 +11,7 @@ const doctor_approved = (
 	</Label>
 );
 
-const CampaignListByUser = ({ history }) => {
-	let userid = '3ca48c5a9baad1bff84a3267';
+const CampaignListByUser = ({ history, userid }) => {
 	const GET_CAMPAIGNS = gql`
 		{
 			getCampaignsFiltered(filter: { wantsApproval: true, creatorid: "${userid}" }) {

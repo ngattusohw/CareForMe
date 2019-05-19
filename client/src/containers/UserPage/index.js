@@ -1,10 +1,10 @@
 import React from 'react';
 import { Menu, Button, Grid, Segment, Divider, Header } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
-import { CampaignListByUser } from '../../components';
+import { CampaignListByUser, DonationListByUser } from '../../components';
 import styles from './UserPage.module.css';
 
-const UserPage = ({ history }) => (
+const UserPage = ({ history, userid }) => (
 	<div>
 		<Menu>
 			<Menu.Item position="right">
@@ -23,9 +23,14 @@ const UserPage = ({ history }) => (
 					<Header as="h2" textAlign="center">
 						Campaign History
 					</Header>
-					<CampaignListByUser />
+					<CampaignListByUser userid={'3ca48c5a9baad1bff84a3267'} />
 				</Grid.Column>
-				<Grid.Column>Hi</Grid.Column>
+				<Grid.Column>
+					<Header as="h2" textAlign="center">
+						Donation History
+					</Header>
+					<DonationListByUser userid={'3ca48c5a9baad1bff84a3267'} />
+				</Grid.Column>
 			</Grid>
 
 			<Divider vertical> My History </Divider>
