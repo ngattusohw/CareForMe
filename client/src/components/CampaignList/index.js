@@ -33,6 +33,7 @@ const CampaignList = ({ history }) => (
 						<div className={styles.element}>
 							{a.wantsApproval ? (
 								<Card
+									key={a.id}
 									header={a.id}
 									meta={`Goal of $${a.goal}`}
 									description={a.description}
@@ -48,6 +49,7 @@ const CampaignList = ({ history }) => (
 								/>
 							) : (
 								<Card
+									key={a.id}
 									header={a.id}
 									meta={`Goal of $${a.goal}`}
 									description={a.description}

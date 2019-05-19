@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { withRouter } from 'react-router-dom';
 import { Menu, Button, Card, Segment, Feed, Icon, Header } from 'semantic-ui-react';
 import styles from './DoctorPage.module.css';
 
@@ -19,7 +20,7 @@ const temporary_queue = [
 	},
 ];
 
-const DoctorPage = () => {
+const DoctorPage = ({ history }) => {
 	const [approvalQueue, setApprovalQueue] = useState([]);
 
 	useEffect(() => {
@@ -30,7 +31,13 @@ const DoctorPage = () => {
 		<div>
 			<Menu>
 				<Menu.Item position="right">
-					<Button>Log out</Button>
+					<Button
+						onClick={() => {
+							history.push('/');
+						}}
+					>
+						Log out
+					</Button>
 				</Menu.Item>
 			</Menu>
 			<Header as="h2" textAlign="center">
@@ -79,4 +86,4 @@ const DoctorPage = () => {
 	);
 };
 
-export default DoctorPage;
+export default withRouter(DoctorPage);

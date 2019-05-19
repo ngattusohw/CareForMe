@@ -3,11 +3,6 @@
 	margin: 2.5% auto;
 }
 
-.feedContainer {
-	margin: 0 auto;
-	width: 30%;
-}
-
 .donateContainer {
 	display: flex;
 	flex-direction: row;

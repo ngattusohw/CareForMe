@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Container, Segment, Grid, Divider, Card, Header, Icon, Feed, Button, Input, Label } from 'semantic-ui-react';
-import { HomePageNavBar } from '../../components';
+import { HomePageNavBar, DonarList } from '../../components';
 import styles from './CampaignPage.module.css';
 
 const submit = (donationAmount, setErrorMessage) => {
@@ -11,23 +11,10 @@ const submit = (donationAmount, setErrorMessage) => {
 	}
 };
 
-/*Temporary*/
-const donarList = [
-	{
-		name: 'Nick Gattuso',
-		date: '5/12/19',
-		amount: 100,
-	},
-];
-
 const CampaignPage = ({ campaignId, name }) => {
-	const [donars, setDonars] = useState([]);
 	const [errorMessage, setErrorMessage] = useState('');
 	const [donationAmount, setDonationAmount] = useState('');
 
-	useEffect(() => {
-		setDonars(donarList);
-	}, [donarList]);
 	return (
 		<div>
 			<HomePageNavBar />
@@ -94,26 +81,7 @@ const CampaignPage = ({ campaignId, name }) => {
 					</Header>
 				</Divider>
 				<Segment>
-					<div className={styles.feedContainer}>
-						<Card>
-							<Card.Content>
-								<Card.Header>Recent Donators</Card.Header>
-							</Card.Content>
-							<Card.Content>
-								<Feed>
-									{donars.map(d => (
-										<Feed.Event>
-											<Feed.Label image="/images/avatar/small/jenny.jpg" />
-											<Feed.Content>
-												<Feed.Date content={d.date} />
-												<Feed.Summary>{`${d.name} donated $${d.amount}`}</Feed.Summary>
-											</Feed.Content>
-										</Feed.Event>
-									))}
-								</Feed>
-							</Card.Content>
-						</Card>
-					</div>
+					<DonarList campaignId={campaignId} />
 				</Segment>
 			</div>
 		</div>
