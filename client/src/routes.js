@@ -1,5 +1,5 @@
 import React from 'react';
-import { HomePage, LoginRegisterPage, RegisterPage, CampaignPage, DoctorPage } from './containers';
+import { HomePage, LoginRegisterPage, RegisterPage, CampaignPage, DoctorPage, UserPage } from './containers';
 
 export default [
 	{
@@ -36,5 +36,14 @@ export default [
 				params: { doctorId = '' },
 			},
 		}) => <DoctorPage doctorId={doctorId} />,
+	},
+	{
+		path: '/user/:userid',
+		exact: true,
+		component: ({
+			match: {
+				params: { userid = '' },
+			},
+		}) => <UserPage userid={userid} />,
 	},
 ];
