@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Segment, Grid, Divider, Card, Header, Icon, Feed, Button, Input, Label } from 'semantic-ui-react';
-import { HomePageNavBar, DonarList } from '../../components';
+import { HomePageNavBar, DonarList, DonateComponent } from '../../components';
 import styles from './CampaignPage.module.css';
 
 const submit = (donationAmount, setErrorMessage) => {
@@ -25,8 +25,7 @@ const CampaignPage = ({ campaignId, name, title, description, goal }) => {
 							<Card
 								image="/images/avatar/large/elliot.jpg"
 								header={name}
-								meta="Friend"
-								description="Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his cat."
+								description={`${name} is seeking ${goal}`}
 							/>
 						</Grid.Column>
 						<Grid.Column>
@@ -40,32 +39,7 @@ const CampaignPage = ({ campaignId, name, title, description, goal }) => {
 					</Grid>
 					<Divider vertical>Info</Divider>
 				</Segment>
-				{errorMessage ? (
-					<Header as="h4" textAlign="center" color="red">
-						{errorMessage}
-					</Header>
-				) : null}
-				<div className={styles.donateContainer}>
-					<Input labelPosition="right" type="text" placeholder="Amount">
-						<Label basic>$</Label>
-						<input
-							onChange={e => {
-								setDonationAmount(e.target.value);
-							}}
-						/>
-						<Label>.00</Label>
-					</Input>
-					<Button
-						positive
-						size="huge"
-						onClick={() => {
-							submit(donationAmount, setErrorMessage);
-						}}
-					>
-						Donate Now!
-					</Button>
-				</div>
-
+				<DonateComponent campaignId={campaignId} />
 				<Divider horizontal>
 					<Header as="h4">
 						<Icon name="money" />
