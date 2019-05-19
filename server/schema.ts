@@ -29,6 +29,7 @@ export const typeDefs = gql`
 		doctorid: ID
 		wantsApproval: Boolean
 		hasApproval: Boolean
+		creatorName: String!
 	}
 
 	input CampaignInput {
@@ -64,6 +65,7 @@ export const typeDefs = gql`
 		campaignId: ID!
 		amount: Int!
 		date: String!
+		donatorName: String!
 	}
 
 	type Query {
@@ -80,7 +82,7 @@ export const typeDefs = gql`
 	}
 
 	type Mutation {
-		donate(userid: ID, campaignid: ID, amount: Int, date: String): Donation
+		donate(userid: ID, campaignid: ID, amount: Int, date: String, donatorName: String): Donation
 		update(campaignid: ID, update: UpdateInput): Update
 		createCampaign(
 			description: String
@@ -88,6 +90,7 @@ export const typeDefs = gql`
 			goal: Int
 			recurring: Boolean
 			wantsApproval: Boolean
+			creatorName: String
 		): Campaign
 		approveCampaign(id: ID): Campaign
 		createUser(name: String, date: String, doctor: Boolean, bio: String, picture: String): User

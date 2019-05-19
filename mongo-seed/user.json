@@ -1,34 +1,34 @@
 [
-  {
-	"_id": ObjectId("6866bda4257abc9e23c77113"),
-    "name": "Austin Powers",
-    "doctor": true,
-    "date": "today",
-    "bio": "yeah baby",
-	"picture": "no"
-  },
-  {
-	"_id": ObjectId("3ca48c5a9baad1bff84a3267"),
-    "name": "Testy McTest",
-    "doctor": false,
-    "date": "today",
-    "bio": "xd",
-	"picture": "nope"
-  },
-  {
-	"_id": ObjectId("7b0a8f8fb4ccf0a901bedf36"),
-    "name": "Jenny Craig",
-    "doctor": true,
-    "date": "tmrw",
-    "bio": "eat me",
-	"picture": "yikes"
-  },
-  {
-	"_id": ObjectId("6e51c7a2bcf244830db70ffa"),
-    "name": "Spider Man",
-    "doctor": false,
-    "date": "yesterday",
-    "bio": "Friendly neighborhood spiderman",
-	"picture": "peter parker"
-  }
+	{
+		"_id": ObjectId("6866bda4257abc9e23c77113"),
+		"name": "Austin Powers",
+		"doctor": true,
+		"date": "today",
+		"bio": "yeah baby",
+		"picture": "no"
+	},
+	{
+		"_id": ObjectId("3ca48c5a9baad1bff84a3267"),
+		"name": "Testy McTest",
+		"doctor": false,
+		"date": "today",
+		"bio": "xd",
+		"picture": "nope"
+	},
+	{
+		"_id": ObjectId("7b0a8f8fb4ccf0a901bedf36"),
+		"name": "Jenny Craig",
+		"doctor": true,
+		"date": "tmrw",
+		"bio": "eat me",
+		"picture": "yikes"
+	},
+	{
+		"_id": ObjectId("6e51c7a2bcf244830db70ffa"),
+		"name": "Spider Man",
+		"doctor": false,
+		"date": "yesterday",
+		"bio": "Friendly neighborhood spiderman",
+		"picture": "peter parker"
+	}
 ]

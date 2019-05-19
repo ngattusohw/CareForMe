@@ -1,4 +1,4 @@
-import { Document } from "mongoose";
+import { Document } from 'mongoose';
 
 export interface User extends Document {
 	id: string;
@@ -20,6 +20,7 @@ export interface Campaign extends Document {
 	doctorid?: string;
 	wantsApproval?: boolean;
 	hasApproval?: boolean;
+	creatorName: string;
 }
 
 export interface Update extends Document {
@@ -36,4 +37,5 @@ export interface Donation extends Document {
 	campaignId: string;
 	amount: number;
 	date: string;
+	donatorName: string;
 }

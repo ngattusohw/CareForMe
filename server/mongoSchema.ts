@@ -1,15 +1,18 @@
-import { Document, Schema, Model, model } from "mongoose";
+import { Document, Schema, Model, model } from 'mongoose';
 import { User, Campaign, Update, Donation } from './models';
 
-const UserSchema: Schema = new Schema({
-	_id: Schema.Types.ObjectId,
-	name: String,
-	doctor: Boolean,
-	date: String,
-	bio: String,
-	picture: String
-}, { versionKey: false });
-UserSchema.pre("save", function (next) {
+const UserSchema: Schema = new Schema(
+	{
+		_id: Schema.Types.ObjectId,
+		name: String,
+		doctor: Boolean,
+		date: String,
+		bio: String,
+		picture: String,
+	},
+	{ versionKey: false }
+);
+UserSchema.pre('save', function(next) {
 	let now = new Date();
 	if (!this.date) {
 		this.date = now;
@@ -17,20 +20,23 @@ UserSchema.pre("save", function (next) {
 	next();
 });
 
-
-const CampaignSchema: Schema = new Schema({
-	_id: Schema.Types.ObjectId,
-	title: String,
-	description: String,
-	creatorid: { type: Schema.Types.ObjectId },
-	goal: Number,
-	recurring: Boolean,
-	date: String,
-	doctorid: { type: Schema.Types.ObjectId },
-	wantsApproval: Boolean,
-	hasApproval: Boolean
-}, { versionKey: false });
-CampaignSchema.pre("save", function (next) {
+const CampaignSchema: Schema = new Schema(
+	{
+		_id: Schema.Types.ObjectId,
+		title: String,
+		description: String,
+		creatorid: { type: Schema.Types.ObjectId },
+		goal: Number,
+		recurring: Boolean,
+		date: String,
+		doctorid: { type: Schema.Types.ObjectId },
+		wantsApproval: Boolean,
+		hasApproval: Boolean,
+		creatorName: String,
+	},
+	{ versionKey: false }
+);
+CampaignSchema.pre('save', function(next) {
 	let now = new Date();
 	if (!this.date) {
 		this.date = now;
@@ -38,15 +44,17 @@ CampaignSchema.pre("save", function (next) {
 	next();
 });
 
-
-const UpdateSchema: Schema = new Schema({
-	_id: Schema.Types.ObjectId,
-	userId: { type: Schema.Types.ObjectId },
-	campaignId: { type: Schema.Types.ObjectId },
-	comment: String,
-	date: String
-}, { versionKey: false });
-UpdateSchema.pre("save", function (next) {
+const UpdateSchema: Schema = new Schema(
+	{
+		_id: Schema.Types.ObjectId,
+		userId: { type: Schema.Types.ObjectId },
+		campaignId: { type: Schema.Types.ObjectId },
+		comment: String,
+		date: String,
+	},
+	{ versionKey: false }
+);
+UpdateSchema.pre('save', function(next) {
 	let now = new Date();
 	if (!this.date) {
 		this.date = now;
@@ -54,15 +62,18 @@ UpdateSchema.pre("save", function (next) {
 	next();
 });
 
-
-const DonationSchema: Schema = new Schema({
-	_id: Schema.Types.ObjectId,
-	userId: { type: Schema.Types.ObjectId },
-	campaignId: { type: Schema.Types.ObjectId },
-	amount: Number,
-	date: String
-}, { versionKey: false });
-DonationSchema.pre("save", function (next) {
+const DonationSchema: Schema = new Schema(
+	{
+		_id: Schema.Types.ObjectId,
+		userId: { type: Schema.Types.ObjectId },
+		campaignId: { type: Schema.Types.ObjectId },
+		amount: Number,
+		date: String,
+		donatorName: String,
+	},
+	{ versionKey: false }
+);
+DonationSchema.pre('save', function(next) {
 	let now = new Date();
 	if (!this.date) {
 		this.date = now;

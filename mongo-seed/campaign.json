@@ -1,24 +1,26 @@
 [
 	{
-		_id: ObjectId("9e200ca2f124727e7ff8d69d"),
-		title: "My nose is stuffy",
-		description: "Pls help",
-		creatorid: ObjectId("3ca48c5a9baad1bff84a3267"),
-		goal: 500000,
-		recurring: true,
-		date: "today",
-		doctorid: ObjectId("6866bda4257abc9e23c77113"),
-		wantsApproval: true,
-		hasApproval: false
+		"_id": ObjectId("9e200ca2f124727e7ff8d69d"),
+		"title": "My nose is stuffy",
+		"description": "Pls help",
+		"creatorid": ObjectId("3ca48c5a9baad1bff84a3267"),
+		"goal": 500000,
+		"recurring": true,
+		"date": "today",
+		"doctorid": ObjectId("6866bda4257abc9e23c77113"),
+		"wantsApproval": true,
+		"hasApproval": false,
+		"creatorName": "Testy McTest"
 	},
 	{
-		_id: ObjectId("f87fec8d9687014bb173c3bb"),
-		title: "I broke both my arms",
-		description: "Bro I'm straight up not having a good time",
-		creatorid: ObjectId("6e51c7a2bcf244830db70ffa"),
-		goal: 40000,
-		recurring: false,
-		date: "yesterday",
-		wantsApproval: false
+		"_id": ObjectId("f87fec8d9687014bb173c3bb"),
+		"title": "I broke both my arms",
+		"description": "Bro I'm straight up not having a good time",
+		"creatorid": ObjectId("6e51c7a2bcf244830db70ffa"),
+		"goal": 40000,
+		"recurring": false,
+		"date": "yesterday",
+		"wantsApproval": false,
+		"creatorName": "Bill elwell"
 	}
 ]
