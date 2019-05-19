@@ -18,6 +18,7 @@ const GET_CAMPAIGNS = gql`
 			description
 			wantsApproval
 			goal
+			title
 		}
 	}
 `;
@@ -34,7 +35,7 @@ const CampaignList = ({ history }) => (
 							{a.wantsApproval ? (
 								<Card
 									key={a.id}
-									header={a.id}
+									header={a.title}
 									meta={`Goal of $${a.goal}`}
 									description={a.description}
 									extra={doctor_approved}
@@ -50,7 +51,7 @@ const CampaignList = ({ history }) => (
 							) : (
 								<Card
 									key={a.id}
-									header={a.id}
+									header={a.title}
 									meta={`Goal of $${a.goal}`}
 									description={a.description}
 									onClick={() => {
