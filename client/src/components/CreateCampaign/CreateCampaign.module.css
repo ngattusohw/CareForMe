@@ -1,0 +1,16 @@
+.container {
+	width: 60%;
+	border: 0.5px solid;
+	border-radius: 5px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+	margin-bottom: 25px;
+}
+
+.element {
+	margin-top: 15px;
+	margin-bottom: 15px;
+	/* margin-top: 25px; */
+}

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
-import shortid from 'shortid';
 import styles from './RegisterPage.module.css';
 import img from '../../images/logo_transparent.png';
 

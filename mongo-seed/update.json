@@ -1,23 +1,23 @@
 [
 	{
-		_id: ObjectId("438a525599beead3cc23e3dd"),
-		userId: ObjectId("6866bda4257abc9e23c77113"),
-		campaignId: ObjectId("f87fec8d9687014bb173c3bb"),
-		comment: "nice!",
-		date: "JUST NOW"
+		"_id": ObjectId("438a525599beead3cc23e3dd"),
+		"userId": ObjectId("6866bda4257abc9e23c77113"),
+		"campaignId": ObjectId("f87fec8d9687014bb173c3bb"),
+		"comment": "nice!",
+		"date": "JUST NOW"
 	},
 	{
-		_id: ObjectId("c7343b2a350cc0fc3a7f36c1"),
-		userId: ObjectId("3ca48c5a9baad1bff84a3267"),
-		campaignId: ObjectId("f87fec8d9687014bb173c3bb"),
-		comment: "This is so fake smh",
-		date: "09/21/19"
+		"_id": ObjectId("c7343b2a350cc0fc3a7f36c1"),
+		"userId": ObjectId("3ca48c5a9baad1bff84a3267"),
+		"campaignId": ObjectId("f87fec8d9687014bb173c3bb"),
+		"comment": "Hi",
+		"date": "09/21/19"
 	},
 	{
-		_id: ObjectId("f99f46b814680982e3f6ea8e"),
-		userId: ObjectId("6e51c7a2bcf244830db70ffa"),
-		campaignId: ObjectId("9e200ca2f124727e7ff8d69d"),
-		comment: "I hope it works out for you!",
-		date: "a year ago"
+		"_id": ObjectId("f99f46b814680982e3f6ea8e"),
+		"userId": ObjectId("6e51c7a2bcf244830db70ffa"),
+		"campaignId": ObjectId("9e200ca2f124727e7ff8d69d"),
+		"comment": "I hope it works out for you!",
+		"date": "a year ago"
 	}
 ]

@@ -1,0 +1,15 @@
+.cardContainer {
+	width: 60%;
+	border: 0.5px solid;
+	border-radius: 5px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+	margin-bottom: 25px;
+}
+
+.element {
+	margin: 15px auto;
+	/* margin-top: 25px; */
+}
