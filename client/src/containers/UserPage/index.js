@@ -23,13 +23,13 @@ const UserPage = ({ history, userid }) => (
 					<Header as="h2" textAlign="center">
 						Campaign History
 					</Header>
-					<CampaignListByUser userid={'3ca48c5a9baad1bff84a3267'} />
+					<CampaignListByUser userid={userid} />
 				</Grid.Column>
 				<Grid.Column>
 					<Header as="h2" textAlign="center">
 						Donation History
 					</Header>
-					<DonationListByUser userid={'3ca48c5a9baad1bff84a3267'} />
+					<DonationListByUser userid={userid} />
 				</Grid.Column>
 			</Grid>
 
