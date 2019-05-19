@@ -1,5 +1,5 @@
 import { Document, Schema, Model, model } from "mongoose";
-import { User, Campaign, Update, Donation } from '../models';
+import { User, Campaign, Update, Donation } from './models';
 
 const UserSchema: Schema = new Schema({
 	_id: Schema.Types.ObjectId,
