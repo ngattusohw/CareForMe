@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { HomePageNavBar, CampaignList } from '../../components';
 import { withRouter } from 'react-router-dom';
-import { Card, Icon, Label, Button, Header, Divider, Segment, Grid, Message } from 'semantic-ui-react';
+import { Icon, Header, Divider, Segment, Grid, Message } from 'semantic-ui-react';
 import styles from './HomePage.module.css';
 import img from '../../images/logo_transparent.png';
 

@@ -2,7 +2,6 @@ import React from 'react';
 import { Menu, Button, Grid, Segment, Divider, Header } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
 import { CampaignListByUser, DonationListByUser, CreateCampaign } from '../../components';
-import styles from './UserPage.module.css';
 
 const UserPage = ({ history, userid }) => (
 	<div>

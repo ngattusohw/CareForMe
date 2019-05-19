@@ -1,20 +1,9 @@
-import React, { useState } from 'react';
-import { Container, Segment, Grid, Divider, Card, Header, Icon, Feed, Button, Input, Label } from 'semantic-ui-react';
+import React from 'react';
+import { Container, Segment, Grid, Divider, Card, Header, Icon } from 'semantic-ui-react';
 import { HomePageNavBar, DonarList, DonateComponent } from '../../components';
 import styles from './CampaignPage.module.css';
 
-const submit = (donationAmount, setErrorMessage) => {
-	if (donationAmount && typeof Number(donationAmount) == 'number') {
-		setErrorMessage('');
-	} else {
-		setErrorMessage('Invalid Donation amount');
-	}
-};
-
 const CampaignPage = ({ campaignId, name, title, description, goal }) => {
-	const [errorMessage, setErrorMessage] = useState('');
-	const [donationAmount, setDonationAmount] = useState('');
-
 	return (
 		<div>
 			<HomePageNavBar />

@@ -1,7 +1,7 @@
 import React from 'react';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
-import { Card, Button, Label } from 'semantic-ui-react';
+import { Card, Label } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
 import styles from './CampaignList.module.css';
 

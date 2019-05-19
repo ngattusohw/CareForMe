@@ -3,6 +3,7 @@ import gql from 'graphql-tag';
 import { Query, Mutation } from 'react-apollo';
 import { Button, Card } from 'semantic-ui-react';
 import styles from './CampaignApprovalList.module.css';
+import shortid from 'shortid';
 
 const submit = () => {
 	return;
@@ -29,16 +30,16 @@ const APPROVE_CAMPAIGN = gql`
 `;
 
 const CampaignApprovalList = () => (
-	<Query query={GET_CAMPAIGNS}>
+	<Query query={GET_CAMPAIGNS} key={shortid.generate()}>
 		{({ loading, error, data }) => {
 			if (loading) return 'Loading...';
 			if (error) return `Error! ${error.message}`;
 			return (
-				<div className={styles.feedContainer}>
+				<div className={styles.feedContainer} key={shortid.generate()}>
 					{data.getCampaignsFiltered.length === 0
 						? 'No campaigns to approve!'
 						: data.getCampaignsFiltered.map(c => (
-								<Mutation mutation={APPROVE_CAMPAIGN}>
+								<Mutation mutation={APPROVE_CAMPAIGN} key={shortid.generate()}>
 									{(approveCampaign, { data, error, loading }) => {
 										if (loading) return 'Loading...';
 										if (error) return `Error! ${error.message}`;
